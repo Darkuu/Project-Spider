@@ -1,0 +1,955 @@
+fileFormatVersion: 2
+guid: ebaa1545b3cbd46458a4239b1ded9c3e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6739675124246355008
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_0
+  - first:
+      213: 6251081321107778505
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_1
+  - first:
+      213: -4373496786133096726
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_2
+  - first:
+      213: -7464794550411457350
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_3
+  - first:
+      213: -7517825050101140008
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_4
+  - first:
+      213: 4494999415626617181
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_5
+  - first:
+      213: 4131005697410936836
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_6
+  - first:
+      213: 9104991659605424539
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_7
+  - first:
+      213: 8230884110702490163
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_8
+  - first:
+      213: 6745553436352244977
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_9
+  - first:
+      213: 5741204401021624344
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_10
+  - first:
+      213: -4871273574691859506
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_11
+  - first:
+      213: -4847461155690049826
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_12
+  - first:
+      213: 5627060982129186445
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_13
+  - first:
+      213: -2601946674874405675
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_14
+  - first:
+      213: -8275007753873456575
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_15
+  - first:
+      213: -3168816777200915469
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_16
+  - first:
+      213: -411997964996695682
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_17
+  - first:
+      213: -3477948179035558394
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_18
+  - first:
+      213: 1109797749038069413
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_19
+  - first:
+      213: -2899765887127119915
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_20
+  - first:
+      213: -7539875616938649869
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_21
+  - first:
+      213: 4191154536559729682
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_22
+  - first:
+      213: 6907356843468939404
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_23
+  - first:
+      213: -8249525492140268448
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_24
+  - first:
+      213: -6127823750939166926
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_25
+  - first:
+      213: -9148709876060976713
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_26
+  - first:
+      213: -4111437743700799991
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_27
+  - first:
+      213: 3795303726952226772
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_28
+  - first:
+      213: -4311984783175553910
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_29
+  - first:
+      213: 5240544377612480790
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_30
+  - first:
+      213: -7319723121227536495
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_31
+  - first:
+      213: 4732723842353275166
+    second: SNES - Super Mario World 2 Yoshis Island - Eggs_32
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 47
+        width: 32
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04c9d3231d2288d50800000000000000
+      internalID: 6739675124246355008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_1
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 115
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cb65b6875d40c650800000000000000
+      internalID: 6251081321107778505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_2
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 116
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae6693448d73e43c0800000000000000
+      internalID: -4373496786133096726
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_3
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 47
+        width: 14
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abc047518e8b76890800000000000000
+      internalID: -7464794550411457350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_4
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 47
+        width: 18
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d53035b2f15ba790800000000000000
+      internalID: -7517825050101140008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_5
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 79
+        width: 24
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d51530a2722716e30800000000000000
+      internalID: 4494999415626617181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_6
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 79
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4003b477bc7445930800000000000000
+      internalID: 4131005697410936836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_7
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 79
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b99fca19cad6b5e70800000000000000
+      internalID: 9104991659605424539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_8
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 47
+        width: 28
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33234d55d79f93270800000000000000
+      internalID: 8230884110702490163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_9
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 79
+        width: 24
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fce0336c150d9d50800000000000000
+      internalID: 6745553436352244977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_10
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 79
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 810adc90cfadcaf40800000000000000
+      internalID: 5741204401021624344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_11
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 79
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec39eb03e72c56cb0800000000000000
+      internalID: -4871273574691859506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_12
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 47
+        width: 28
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ede079803cb5abcb0800000000000000
+      internalID: -4847461155690049826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_13
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 86
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8655495626571e40800000000000000
+      internalID: 5627060982129186445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_14
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 86
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5dc2a9fe84704ebd0800000000000000
+      internalID: -2601946674874405675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_15
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 47
+        width: 33
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14205cc6a44492d80800000000000000
+      internalID: -8275007753873456575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_16
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 47
+        width: 24
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fb24a42ee91604d0800000000000000
+      internalID: -3168816777200915469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_17
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 47
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e792030a80a484af0800000000000000
+      internalID: -411997964996695682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_18
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 47
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60e6e51ee88dbbfc0800000000000000
+      internalID: -3477948179035558394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_19
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 47
+        width: 24
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a631fb3c2bc66f00800000000000000
+      internalID: 1109797749038069413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_20
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 47
+        width: 22
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d71efd0a46f1c7d0800000000000000
+      internalID: -2899765887127119915
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_21
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 47
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f61eb9031bfc5790800000000000000
+      internalID: -7539875616938649869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_22
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 54
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21cd86668d8f92a30800000000000000
+      internalID: 4191154536559729682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_23
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 54
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8064dfc37cdbdf50800000000000000
+      internalID: 6907356843468939404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 15
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0642373d54cc38d80800000000000000
+      internalID: -8249525492140268448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_25
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 15
+        width: 31
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 237b11fd3c895faa0800000000000000
+      internalID: -6127823750939166926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_26
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 15
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b90744f6d0490180800000000000000
+      internalID: -9148709876060976713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_27
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 15
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90e849ac72d31f6c0800000000000000
+      internalID: -4111437743700799991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_28
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 0
+        width: 24
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4df14bb91a0aba430800000000000000
+      internalID: 3795303726952226772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_29
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 0
+        width: 22
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8c6ee18fa0c824c0800000000000000
+      internalID: -4311984783175553910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_30
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 0
+        width: 30
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 611334988572ab840800000000000000
+      internalID: 5240544377612480790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_31
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 0
+        width: 28
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 197e4015a9e1b6a90800000000000000
+      internalID: -7319723121227536495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SNES - Super Mario World 2 Yoshis Island - Eggs_32
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 6
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e112d7372430ea140800000000000000
+      internalID: 4732723842353275166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
