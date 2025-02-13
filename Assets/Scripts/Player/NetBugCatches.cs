@@ -57,7 +57,6 @@ public class NetBugCatcher : MonoBehaviour
                 }
 
                 // Handle Eggs:
-                // Handle Eggs:
                 EggItem eggComp = collider.GetComponent<EggItem>();
                 if (eggComp != null)
                 {

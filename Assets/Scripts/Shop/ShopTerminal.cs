@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class ShopTerminal : MonoBehaviour
 {
-    public GameObject shopUI;         // Reference to the shop UI panel
-    public KeyCode openKey = KeyCode.E; // Key to open/close the shop UI
+    public GameObject shopUI;
+    public KeyCode openKey = KeyCode.E;
     private bool playerInRange = false;
+
+    [Header("Spawn Settings")]
+    public Transform spawnPoint; // The point where objects will spawn for this terminal.
 
     private void Start()
     {
@@ -14,7 +17,6 @@ public class ShopTerminal : MonoBehaviour
 
     private void Update()
     {
-        // If player is in range and presses E, toggle the shop UI.
         if (playerInRange && Input.GetKeyDown(openKey))
         {
             ToggleShop();
@@ -27,17 +29,30 @@ public class ShopTerminal : MonoBehaviour
         {
             bool isActive = shopUI.activeSelf;
             shopUI.SetActive(!isActive);
-            // Optionally, lock player movement when the shop is open.
+
+            if (shopUI.activeSelf)
+            {
+                ShopUIController controller = shopUI.GetComponent<ShopUIController>();
+                if (controller != null)
+                {
+                    controller.currentTerminal = this;
+                }
+            }
         }
+    }
+
+    public void CloseAndRemoveTerminal()
+    {
+        if (shopUI != null)
+            shopUI.SetActive(false);
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        // Make sure your player GameObject is tagged "Player"
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-            // Optionally, display a prompt like "Press E to open shop"
         }
     }
 

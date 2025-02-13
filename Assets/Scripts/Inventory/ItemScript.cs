@@ -17,7 +17,6 @@ public class ItemScript : ScriptableObject
     public Bug bugPlacementPrefab;
 
     [Header("Food Interaction")]
-    // Optional: Set this for food items, which bugs can consume.
     public bool isFoodItem = false; 
     public GameObject foodPlacementPrefab;
     
