@@ -7,7 +7,7 @@ public class ShopTerminal : MonoBehaviour
     private bool playerInRange = false;
 
     [Header("Spawn Settings")]
-    public Transform spawnPoint; // The point where objects will spawn for this terminal.
+    public Transform spawnPoint; 
 
     private void Start()
     {

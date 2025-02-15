@@ -1,4 +1,4 @@
-using UnityEngine;
+    using UnityEngine;
 
 [CreateAssetMenu(menuName = "Scriptable object/Item")]
 public class ItemScript : ScriptableObject

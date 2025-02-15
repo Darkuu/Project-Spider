@@ -176,4 +176,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eggItem: {fileID: 11400000, guid: 43b0d9fff67369243a3ecf12f85dead4, type: 2}
-  sellValue: 0
+  eggType: Normal
