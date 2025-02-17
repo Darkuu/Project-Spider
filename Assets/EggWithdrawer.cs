@@ -1,33 +1,24 @@
 using UnityEngine;
 
-public class Eggwithdrawer : MonoBehaviour
+public class EggWithdrawer : MonoBehaviour
 {
-    public float interactionRange = 3f;  // Optional: define how close player must be to interact
-    private bool isPlayerInRange = false;  // Flag to track if the player is in range
-    private EggCollector eggCollector;  // Reference to the EggCollector component
+    [Header("Collector Reference")]
+    public EggCollector eggCollector;  // Assign the specific EggCollector from the Inspector
 
-    private void Start()
-    {
-        eggCollector = GetComponent<EggCollector>();  // Get the EggCollector component on this object
-        if (eggCollector == null)
-        {
-            Debug.LogError("EggCollector component not found on this object.");
-        }
-    }
+    private bool isPlayerInRange = false;
 
     private void Update()
     {
         if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("Player pressed E near EggCollector.");
-            // Trigger the EggCollector to drop all eggs
             if (eggCollector != null)
             {
-                eggCollector.DropAllEggs();
+                eggCollector.DropAllEggs(); // Call DropAllEggs instead of WithdrawEggs
+                Debug.Log("Eggs withdrawn from collector.");
             }
             else
             {
-                Debug.LogError("EggCollector not found or not assigned.");
+                Debug.LogError("No EggCollector assigned to withdrawer.");
             }
         }
     }
@@ -36,8 +27,8 @@ public class Eggwithdrawer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerInRange = true;  // Player is in range to interact
-            Debug.Log("Player entered the trigger zone.");
+            isPlayerInRange = true;
+            Debug.Log("Player entered the withdrawer area.");
         }
     }
 
@@ -45,14 +36,8 @@ public class Eggwithdrawer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            isPlayerInRange = false;  // Player is no longer in range
-            Debug.Log("Player exited the trigger zone.");
+            isPlayerInRange = false;
+            Debug.Log("Player left the withdrawer area.");
         }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, interactionRange);
     }
 }

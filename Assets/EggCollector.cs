@@ -1,25 +1,29 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using System.Collections.Generic;
 
 public class EggCollector : MonoBehaviour
 {
     [Header("Collector Settings")]
     public float collectionRadius = 5f;  
-    public LayerMask eggLayer;           
     public float collectionInterval = 5f; 
     public int maxCapacity = 100;        
-    private string eggType = null;        // The egg type it collects (first collected)
+    private string eggType = null;                
 
     [Header("UI Settings")]
     public TMP_Text eggCountText;         
 
     [Header("Egg Drop Settings")]
-    public GameObject eggPrefab;          
     public Transform dropPoint;           
+
+    // Instead of a Transform, we use a preset coordinate for storage:
+    [Header("Egg Storage Settings")]
+    public Vector3 storagePoint = new Vector3(10, 50, 0);
 
     private int eggCount = 0;
     public int EggCount => eggCount;
+    private List<GameObject> storedEggs = new List<GameObject>();
 
     private void Start()
     {
@@ -40,24 +44,27 @@ public class EggCollector : MonoBehaviour
     {
         if (eggCount >= maxCapacity) return;
 
-        Collider2D[] eggs = Physics2D.OverlapCircleAll(transform.position, collectionRadius, eggLayer);
-
+        Collider2D[] eggs = Physics2D.OverlapCircleAll(transform.position, collectionRadius);
         foreach (Collider2D eggCollider in eggs)
         {
             if (eggCollider.CompareTag("Egg"))
             {
                 EggItem egg = eggCollider.GetComponent<EggItem>();
+                if (egg == null) continue;
 
-                // If no egg type is set, assign it to the first collected egg
+                // Lock onto the egg type if not already set
                 if (eggType == null)
                 {
                     eggType = egg.eggType;
                 }
 
-                // Collect only eggs that match the type
+                // Only collect eggs matching the locked type
                 if (egg.eggType == eggType && eggCount < maxCapacity)
                 {
-                    Destroy(eggCollider.gameObject);
+                    // Teleport the egg to the preset storage point and disable it
+                    eggCollider.transform.position = storagePoint;
+                    eggCollider.gameObject.SetActive(false);
+                    storedEggs.Add(eggCollider.gameObject);
                     eggCount++;
                 }
             }
@@ -67,17 +74,30 @@ public class EggCollector : MonoBehaviour
 
     public void DropAllEggs()
     {
-        if (eggPrefab == null || dropPoint == null) return;
-
-        for (int i = 0; i < eggCount; i++)
+        if (dropPoint == null)
         {
-            Instantiate(eggPrefab, dropPoint.position, Quaternion.identity);
+            Debug.LogError("Drop point is not assigned!");
+            return;
         }
 
-        // Reset the collector after dropping all eggs
+        if (eggCount <= 0)
+        {
+            Debug.Log("No eggs to drop.");
+            return;
+        }
+
+        Debug.Log($"Dropping {eggCount} eggs of type {eggType}...");
+
+        // Reactivate and drop each stored egg at the drop point
+        foreach (GameObject egg in storedEggs)
+        {
+            egg.transform.position = dropPoint.position;
+            egg.SetActive(true);
+        }
+
+        storedEggs.Clear();
         eggCount = 0;
         eggType = null;
-
         UpdateEggCountDisplay();
     }
 

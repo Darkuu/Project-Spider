@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ShopActivateItemButton : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class ShopActivateItemButton : MonoBehaviour
 
     [Header("UI Display")]
     public TMP_Text priceText;
+
+    [Header("Button Settings")]
+    public bool disableAfterPurchase = true; // Toggle to disable button after purchase
 
     private void Start()
     {
@@ -23,13 +27,26 @@ public class ShopActivateItemButton : MonoBehaviour
             if (itemToActivate != null)
             {
                 itemToActivate.SetActive(true);
+
+                if (disableAfterPurchase)
+                {
+                    Button btn = GetComponent<Button>();
+                    if (btn != null)
+                    {
+                        btn.interactable = false;
+                    }
+                    else
+                    {
+                        gameObject.SetActive(false);
+                    }
+                }
+
                 ShopUIController shopUIController = GetComponentInParent<ShopUIController>();
                 if (shopUIController != null && shopUIController.currentTerminal != null)
                 {
                     shopUIController.currentTerminal.CloseAndRemoveTerminal();
                 }
             }
-
         }
     }
 }
