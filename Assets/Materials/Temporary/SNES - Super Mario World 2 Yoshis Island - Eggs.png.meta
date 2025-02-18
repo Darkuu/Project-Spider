@@ -205,6 +205,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -947,7 +960,40 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SNES - Super Mario World 2 Yoshis Island - Eggs_0: 6739675124246355008
+      SNES - Super Mario World 2 Yoshis Island - Eggs_1: 6251081321107778505
+      SNES - Super Mario World 2 Yoshis Island - Eggs_10: 5741204401021624344
+      SNES - Super Mario World 2 Yoshis Island - Eggs_11: -4871273574691859506
+      SNES - Super Mario World 2 Yoshis Island - Eggs_12: -4847461155690049826
+      SNES - Super Mario World 2 Yoshis Island - Eggs_13: 5627060982129186445
+      SNES - Super Mario World 2 Yoshis Island - Eggs_14: -2601946674874405675
+      SNES - Super Mario World 2 Yoshis Island - Eggs_15: -8275007753873456575
+      SNES - Super Mario World 2 Yoshis Island - Eggs_16: -3168816777200915469
+      SNES - Super Mario World 2 Yoshis Island - Eggs_17: -411997964996695682
+      SNES - Super Mario World 2 Yoshis Island - Eggs_18: -3477948179035558394
+      SNES - Super Mario World 2 Yoshis Island - Eggs_19: 1109797749038069413
+      SNES - Super Mario World 2 Yoshis Island - Eggs_2: -4373496786133096726
+      SNES - Super Mario World 2 Yoshis Island - Eggs_20: -2899765887127119915
+      SNES - Super Mario World 2 Yoshis Island - Eggs_21: -7539875616938649869
+      SNES - Super Mario World 2 Yoshis Island - Eggs_22: 4191154536559729682
+      SNES - Super Mario World 2 Yoshis Island - Eggs_23: 6907356843468939404
+      SNES - Super Mario World 2 Yoshis Island - Eggs_24: -8249525492140268448
+      SNES - Super Mario World 2 Yoshis Island - Eggs_25: -6127823750939166926
+      SNES - Super Mario World 2 Yoshis Island - Eggs_26: -9148709876060976713
+      SNES - Super Mario World 2 Yoshis Island - Eggs_27: -4111437743700799991
+      SNES - Super Mario World 2 Yoshis Island - Eggs_28: 3795303726952226772
+      SNES - Super Mario World 2 Yoshis Island - Eggs_29: -4311984783175553910
+      SNES - Super Mario World 2 Yoshis Island - Eggs_3: -7464794550411457350
+      SNES - Super Mario World 2 Yoshis Island - Eggs_30: 5240544377612480790
+      SNES - Super Mario World 2 Yoshis Island - Eggs_31: -7319723121227536495
+      SNES - Super Mario World 2 Yoshis Island - Eggs_32: 4732723842353275166
+      SNES - Super Mario World 2 Yoshis Island - Eggs_4: -7517825050101140008
+      SNES - Super Mario World 2 Yoshis Island - Eggs_5: 4494999415626617181
+      SNES - Super Mario World 2 Yoshis Island - Eggs_6: 4131005697410936836
+      SNES - Super Mario World 2 Yoshis Island - Eggs_7: 9104991659605424539
+      SNES - Super Mario World 2 Yoshis Island - Eggs_8: 8230884110702490163
+      SNES - Super Mario World 2 Yoshis Island - Eggs_9: 6745553436352244977
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
