@@ -16,22 +16,16 @@ public class ShopItemButton : MonoBehaviour
             priceText.text = price.ToString();
     }
 
-    // This method is called when the UI button is clicked.
     public void PurchaseItem()
     {
-        // Check if the player has enough coins.
         if (MoneyManager.instance.SpendCoins(price))
         {
-            // Find the terminal associated with this shop UI button
             ShopUIController shopUIController = GetComponentInParent<ShopUIController>();
             if (shopUIController != null && shopUIController.currentTerminal != null)
             {
-                // Use the terminal's spawn point
                 Transform spawnTransform = shopUIController.currentTerminal.spawnPoint;
                 Instantiate(itemPrefab, spawnTransform.position, spawnTransform.rotation);
                 Debug.Log("Item purchased for " + price + " coins.");
-
-                // Close and remove this terminal after purchase
                 shopUIController.currentTerminal.CloseAndRemoveTerminal();
             }
         }

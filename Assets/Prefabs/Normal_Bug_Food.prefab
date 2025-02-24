@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1054957511110630052}
   - component: {fileID: 992087955209068890}
   - component: {fileID: 4408711006759742070}
-  - component: {fileID: 5367311988999674165}
+  - component: {fileID: 1986613399910568232}
   - component: {fileID: 6759334500660345613}
   m_Layer: 10
   m_Name: Normal_Bug_Food
@@ -126,7 +126,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!50 &5367311988999674165
+--- !u!50 &1986613399910568232
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -139,8 +139,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_LinearDamping: 5
+  m_AngularDamping: 3
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
