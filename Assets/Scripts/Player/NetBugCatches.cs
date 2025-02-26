@@ -11,13 +11,27 @@ public class NetBugCatcher : MonoBehaviour
     public LayerMask foodLayer;
     public LayerMask eggLayer;
 
-    void Update()
+    public Transform player;  // Reference to the player object
+
+    private void Start()
     {
+        // Ensure we have a reference to the player
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("Player").transform;  // Assume your player object is tagged "Player"
+        }
+    }
+
+    private void Update()
+    {
+        // Rotate and move the net around the player to face the mouse
+        RotateAroundPlayer();
+
         // --- CAPTURE (RIGHT MOUSE BUTTON) ---
         if (Input.GetMouseButtonDown(1))
         {
             Debug.Log("Right mouse button clicked for capture.");
-            
+
             Vector2 center = (Vector2)transform.position + offset;
             Collider2D[] hitColliders = Physics2D.OverlapBoxAll(center, boxSize, 0f, bugLayer | foodLayer | eggLayer);
 
@@ -99,6 +113,27 @@ public class NetBugCatcher : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void RotateAroundPlayer()
+    {
+        // Get the mouse position in world space
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0; // We're in 2D, so ignore the Z-axis
+
+        // Calculate the direction from the player to the mouse
+        Vector2 direction = (mousePosition - player.position).normalized;
+
+        // Calculate the angle from the player to the mouse
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        // Set the position of the net around the player (this keeps it in orbit)
+        float radius = 1f;  // Set a fixed distance from the player (adjustable if needed)
+        Vector2 netPosition = (Vector2)player.position + direction * radius;
+        transform.position = netPosition;
+
+        // Apply the rotation to the net, so it faces the mouse
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     // Optional: Visualize the capture area in Scene view.

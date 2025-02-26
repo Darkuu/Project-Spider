@@ -1019,6 +1019,7 @@ GameObject:
   - component: {fileID: 7930624237827482906}
   - component: {fileID: 1893332290211933661}
   - component: {fileID: 5811591218087637968}
+  - component: {fileID: 4805666477213286232}
   m_Layer: 5
   m_Name: Destroy Button
   m_TagString: Untagged
@@ -1127,7 +1128,32 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1893332290211933661}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4805666477213286232}
+        m_TargetAssemblyTypeName: DeleteObject, Assembly-CSharp
+        m_MethodName: DeleteObjects
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4805666477213286232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2183820203062068438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a432f77a1f99c1741bc12aadcb5a3f85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToDelete: {fileID: 2787445764692447596}
 --- !u!1 &2204434061299226295
 GameObject:
   m_ObjectHideFlags: 0
@@ -1405,8 +1431,8 @@ Transform:
   m_Children:
   - {fileID: 88444603030801381}
   - {fileID: 2990260283251885631}
-  - {fileID: 7485616247853878784}
   - {fileID: 6552119502303350790}
+  - {fileID: 7485616247853878784}
   - {fileID: 1795441042531373761}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1558,7 +1584,7 @@ GameObject:
   - component: {fileID: 6377863270838734425}
   - component: {fileID: 1531921855990209145}
   - component: {fileID: 899927133113893221}
-  - component: {fileID: 2906990004874090796}
+  - component: {fileID: 676851217748512061}
   m_Layer: 5
   m_Name: Auto Feeder
   m_TagString: Untagged
@@ -1669,8 +1695,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2906990004874090796}
-        m_TargetAssemblyTypeName: ShopActivateItemButton, Assembly-CSharp
+      - m_Target: {fileID: 676851217748512061}
+        m_TargetAssemblyTypeName: ShopPurchaseButton, Assembly-CSharp
         m_MethodName: PurchaseItem
         m_Mode: 1
         m_Arguments:
@@ -1681,7 +1707,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2906990004874090796
+--- !u!114 &676851217748512061
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1690,13 +1716,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 3405446597447926210}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecb233ed35b5c374eb3f24372c18f9e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3933e75156266b84d8af160f0a1896be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 20
+  price: 250
+  itemPrefab: {fileID: 0}
   itemToActivate: {fileID: 5649522729074275289}
-  priceText: {fileID: 6621882909701311008}
   disableAfterPurchase: 1
+  priceText: {fileID: 6621882909701311008}
 --- !u!1 &3452305960377767277
 GameObject:
   m_ObjectHideFlags: 0
@@ -2926,7 +2953,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7485616247853878784
 Transform:
   m_ObjectHideFlags: 0
@@ -3567,7 +3594,7 @@ GameObject:
   - component: {fileID: 4628793615055267123}
   - component: {fileID: 5338775112080969757}
   - component: {fileID: 1002232160669976292}
-  - component: {fileID: 5340574421062455021}
+  - component: {fileID: 1880721912302474613}
   m_Layer: 5
   m_Name: Egg Collector
   m_TagString: Untagged
@@ -3678,8 +3705,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5340574421062455021}
-        m_TargetAssemblyTypeName: ShopActivateItemButton, Assembly-CSharp
+      - m_Target: {fileID: 1880721912302474613}
+        m_TargetAssemblyTypeName: ShopPurchaseButton, Assembly-CSharp
         m_MethodName: PurchaseItem
         m_Mode: 1
         m_Arguments:
@@ -3690,7 +3717,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5340574421062455021
+--- !u!114 &1880721912302474613
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3699,13 +3726,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 7175124573915286186}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecb233ed35b5c374eb3f24372c18f9e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3933e75156266b84d8af160f0a1896be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 50
+  price: 250
+  itemPrefab: {fileID: 0}
   itemToActivate: {fileID: 6544272286115129720}
+  disableAfterPurchase: 0
   priceText: {fileID: 5809727284385584731}
-  disableAfterPurchase: 1
 --- !u!1 &7812658316151703731
 GameObject:
   m_ObjectHideFlags: 0
