@@ -47,7 +47,6 @@ public class ShopPurchaseButton : MonoBehaviour
             }
             else
             {
-                Debug.LogError("DeleteObject script not found on spawned item!");
             }
         }
 
