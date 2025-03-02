@@ -7,7 +7,9 @@ public class InventoryManager : MonoBehaviour
     public int maxStackedItems = 10;
     public InventorySlot[] inventorySlots;
     public GameObject inventoryItemPrefab;
-    
+
+    private float scrollCooldown = 0.1f; 
+    private float lastScrollTime = 0f;  
 
     private int selectedSlot = -1;
 
@@ -22,13 +24,28 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.inputString != null)
+        // Handle number key inputs
+        if (!string.IsNullOrEmpty(Input.inputString))
         {
             bool isNumber = int.TryParse(Input.inputString, out int number);
-            if (isNumber && number > 0 && number <= 4)
+            if (isNumber && number > 0 && number <= inventorySlots.Length)
             {
                 ChangeSelectedSlot(number - 1);
             }
+        }
+
+        // Handle scroll wheel input with cooldown
+        float scroll = Input.mouseScrollDelta.y;
+        if (scroll != 0 && Time.time - lastScrollTime > scrollCooldown)
+        {
+            int newSlot = selectedSlot + (scroll > 0 ? 1 : -1);
+
+            // Wrap around when reaching the first or last slot
+            if (newSlot >= inventorySlots.Length) newSlot = 0;
+            if (newSlot < 0) newSlot = inventorySlots.Length - 1;
+
+            ChangeSelectedSlot(newSlot);
+            lastScrollTime = Time.time; // Reset cooldown timer
         }
     }
 
