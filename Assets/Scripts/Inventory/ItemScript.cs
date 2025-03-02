@@ -34,17 +34,14 @@ public class ItemScript : ScriptableObject
         if (type == ItemType.Bug && bugPlacementPrefab != null)
         {
             Instantiate(bugPlacementPrefab.gameObject, spawnPosition, Quaternion.identity);
-            Debug.Log("Bug placed at " + spawnPosition);
         }
         else if (isFoodItem && foodPlacementPrefab != null)
         {
             Instantiate(foodPlacementPrefab, spawnPosition, Quaternion.identity); 
-            Debug.Log("Food placed at " + spawnPosition);
         }
         else if (isEggItem && eggPlacementPrefab != null)
         {
             Instantiate(eggPlacementPrefab, spawnPosition, Quaternion.identity);
-            Debug.Log("Egg placed at " + spawnPosition);
         }
         else
         {
