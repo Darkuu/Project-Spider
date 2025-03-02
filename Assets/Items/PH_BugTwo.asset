@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34436ff030acfc34ea62e553df066c8d, type: 3}
+  m_Name: PH_BugTwo
+  m_EditorClassIdentifier: 
+  type: 0
+  range: {x: 5, y: 4}
+  stackable: 1
+  image: {fileID: -5279203824658248110, guid: 240671fa1d34523459ac90486dcb1257, type: 3}
+  bugPlacementPrefab: {fileID: 6008233627096313257, guid: f08de69c28a01d34897049d67883965c, type: 3}
+  isFoodItem: 0
+  foodPlacementPrefab: {fileID: 0}
+  isEggItem: 0
+  eggPlacementPrefab: {fileID: 0}
+  sellValue: 0
