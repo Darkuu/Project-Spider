@@ -109,7 +109,7 @@ public class NetBugCatcher : MonoBehaviour
                 {
                     InventoryManager.instance.GetSelectedItem(true); // Remove from inventory
                     selectedItem.Use(spawnPosition);
-                    Debug.Log($"{selectedItem.type} placed back into the world at {spawnPosition}");
+                   // Debug.Log($"{selectedItem.type} placed back into the world at {spawnPosition}");
                 }
             }
         }

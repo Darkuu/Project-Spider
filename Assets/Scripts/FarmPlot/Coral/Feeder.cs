@@ -6,152 +6,86 @@ using System.Collections.Generic;
 public class Feeder : MonoBehaviour
 {
     [Header("Collector Settings")]
-    public Collider2D collectionCollider; // Collider where food is collected
+    public Collider2D collectionCollider;  
     public int maxFoodCapacity = 20;
+    private string foodType = null;
 
     [Header("Feeding Settings")]
     public Transform dropPoint;
-    public float slowInterval = 10f;
-    public float mediumInterval = 5f;
-    public float fastInterval = 2f;
-    private float currentInterval;
+    public float feedInterval = 2f;  
 
     [Header("UI")]
-    public GameObject speedSelectionUI;
     public TMP_Text foodCountText;
 
-    // Store foods by type
-    private Dictionary<string, Queue<GameObject>> foodStorage = new Dictionary<string, Queue<GameObject>>();
-    private Coroutine feedingRoutine;
-    private bool isPlayerInRange = false;
+    private List<GameObject> storedFood = new List<GameObject>();
+    private int foodCount = 0;
 
     private void Start()
     {
-        SetFeedingSpeed(2);
         UpdateFoodCountUI();
+        StartCoroutine(FeedRoutine());  
     }
 
-    private void Update()
-    {
-        if (isPlayerInRange && Input.GetKeyDown(KeyCode.E))
-        {
-            ToggleSpeedUI();
-        }
-    }
-
-    // Automatically collects food when it enters the collider
+    // Collect food when it enters the collection collider
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"Entered Trigger with: {other.gameObject.name}");
+        if (foodCount >= maxFoodCapacity) return;  
 
         if (other.CompareTag("Food"))
         {
-            Debug.Log("Food detected in trigger!");
-        }
-        
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInRange = true;
-        }
+            Food food = other.GetComponent<Food>();
+            if (food == null) return;
 
-        if (other.TryGetComponent(out Food foodItem) && collectionCollider != null)
-        {
-            // Collect only if it entered the collection zone
-            if (collectionCollider.bounds.Contains(other.transform.position))
+            // Lock onto food type if not set
+            if (foodType == null)
             {
-                CollectFood(other.gameObject, foodItem.foodType);
+                foodType = food.foodType;
+            }
+
+            // Only collect matching food type
+            if (food.foodType == foodType && foodCount < maxFoodCapacity)
+            {
+                other.gameObject.SetActive(false);  
+                storedFood.Add(other.gameObject);  
+                foodCount++;
+                UpdateFoodCountUI();
             }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInRange = false;
-            ToggleSpeedUI(false);
-        }
-    }
-
-    private void CollectFood(GameObject food, string type)
-    {
-        if (!foodStorage.ContainsKey(type))
-        {
-            foodStorage[type] = new Queue<GameObject>();
-        }
-
-        if (GetTotalFoodCount() < maxFoodCapacity)
-        {
-            food.SetActive(false); 
-            foodStorage[type].Enqueue(food);
-            UpdateFoodCountUI();
-        }
-    }
-
-    // Dispenses food based on the collected types
+    // Feed food from storage at regular intervals
     private IEnumerator FeedRoutine()
     {
         while (true)
         {
-            foreach (var kvp in foodStorage)
+            if (storedFood.Count > 0)
             {
-                string foodType = kvp.Key;
-                Queue<GameObject> queue = kvp.Value;
-
-                if (queue.Count > 0)
-                {
-                    GameObject food = queue.Dequeue();
-                    food.transform.position = dropPoint.position;
-                    food.SetActive(true);
-                    UpdateFoodCountUI();
-                }
+                GameObject food = storedFood[0];
+                storedFood.RemoveAt(0);
+                food.transform.position = dropPoint.position;  
+                food.SetActive(true); 
+                foodCount--;  
+                UpdateFoodCountUI();
             }
-            yield return new WaitForSeconds(currentInterval);
-        }
-    }
-
-    public void SetFeedingSpeed(int speed)
-    {
-        if (feedingRoutine != null)
-        {
-            StopCoroutine(feedingRoutine);
-        }
-
-        switch (speed)
-        {
-            case 1: currentInterval = slowInterval; break;
-            case 2: currentInterval = mediumInterval; break;
-            case 3: currentInterval = fastInterval; break;
-        }
-
-        feedingRoutine = StartCoroutine(FeedRoutine());
-        ToggleSpeedUI(false);
-    }
-
-    private void ToggleSpeedUI(bool show = true)
-    {
-        if (speedSelectionUI != null)
-        {
-            speedSelectionUI.SetActive(show);
+            yield return new WaitForSeconds(feedInterval);  
         }
     }
 
     private void UpdateFoodCountUI()
     {
+        string foodTypeDisplay = foodType != null ? foodType : "Any";
         if (foodCountText != null)
         {
-            foodCountText.text = $"{GetTotalFoodCount()}/{maxFoodCapacity}";
+            foodCountText.text = $"Food: {foodCount}/{maxFoodCapacity} ({foodTypeDisplay})";
         }
     }
 
-    private int GetTotalFoodCount()
+    private void OnDrawGizmosSelected()
     {
-        int total = 0;
-        foreach (var kvp in foodStorage)
+        if (collectionCollider != null)
         {
-            total += kvp.Value.Count;
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(collectionCollider.bounds.center, collectionCollider.bounds.size);
         }
-        return total;
     }
-    
 }

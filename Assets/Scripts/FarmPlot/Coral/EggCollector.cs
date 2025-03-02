@@ -76,19 +76,14 @@ public class EggCollector : MonoBehaviour
     {
         if (dropPoint == null)
         {
-            Debug.LogError("Drop point is not assigned!");
             return;
         }
 
         if (eggCount <= 0)
         {
-            Debug.Log("No eggs to drop.");
             return;
         }
 
-        Debug.Log($"Dropping {eggCount} eggs of type {eggType}...");
-
-        // Reactivate and drop each stored egg at the drop point
         foreach (GameObject egg in storedEggs)
         {
             egg.transform.position = dropPoint.position;
@@ -106,7 +101,7 @@ public class EggCollector : MonoBehaviour
         string eggTypeDisplay = eggType != null ? eggType : "Any";
         if (eggCountText != null)
         {
-            eggCountText.text = $"Eggs: {eggCount}/{maxCapacity} ({eggTypeDisplay})";
+            eggCountText.text = $"{eggCount}/{maxCapacity} ({eggTypeDisplay})";
         }
     }
 
