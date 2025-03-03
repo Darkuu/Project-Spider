@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class Bug : MonoBehaviour
 {
-    // Assign the corresponding ItemScript for this bug in the inspector.
+    [Header("Bug Stats Interaction")]
+    [Tooltip("Item the player receives upon pickup")]
     public ItemScript bugItem;
 
     [Header("Food Interaction")]
-    public string allowedFoodTag = "SpecificFood"; 
+    [Tooltip("What kind of food can it eat")]
+    public string allowedFoodTag;
+    [Tooltip("What it poops out upon eating")]
     public GameObject poopPrefab;
 
     /// <summary>
@@ -16,7 +19,6 @@ public class Bug : MonoBehaviour
     {
         if (other.gameObject.CompareTag(allowedFoodTag))
         {
-            Debug.Log("Bug has eaten the allowed food!");
             DropPoop();
             Destroy(other.gameObject);
         }

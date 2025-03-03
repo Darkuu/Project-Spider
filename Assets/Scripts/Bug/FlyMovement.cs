@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class FlyMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 3f;
-    [SerializeField] private float changeDirectionTime = 2f;
-    [SerializeField] private float waitTime = 2f; // Time before moving again
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float changeDirectionTime;
+    [SerializeField] private float waitTime;
     private Vector2 moveDirection;
     private Rigidbody2D rb;
 
@@ -14,22 +14,22 @@ public class FlyMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(WanderRoutine());
     }
+
     private void FixedUpdate()
     {
         Vector2 newPosition = rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(newPosition);
     }
 
-
     private IEnumerator WanderRoutine()
     {
         while (true)
         {
-            moveDirection = Vector2.zero; // Stop moving
-            yield return new WaitForSeconds(waitTime); // Wait before moving again
+            moveDirection = Vector2.zero; 
+            yield return new WaitForSeconds(waitTime); 
 
-            moveDirection = GetRandomDirection(); // Pick a new direction
-            yield return new WaitForSeconds(changeDirectionTime); // Move for a while
+            moveDirection = GetRandomDirection(); 
+            yield return new WaitForSeconds(changeDirectionTime);
         }
     }
 

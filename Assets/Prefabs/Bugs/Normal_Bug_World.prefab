@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7023718015586040179}
   - component: {fileID: 6008233627096313257}
   - component: {fileID: -6591322468981872985}
+  - component: {fileID: 4610756560969618028}
   m_Layer: 7
   m_Name: Normal_Bug_World
   m_TagString: Bug
@@ -177,6 +178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bugItem: {fileID: 11400000, guid: 5a7d0b16de83654459a16b452052c29b, type: 2}
+  eatingCooldown: 5
+  foodRange: {fileID: 4610756560969618028}
   allowedFoodTag: Food
   poopPrefab: {fileID: 4023120096391451991, guid: 97705acdb01c7f54c93f5fcd0316b227, type: 3}
 --- !u!114 &-6591322468981872985
@@ -194,3 +197,39 @@ MonoBehaviour:
   moveSpeed: 5
   changeDirectionTime: 1
   waitTime: 2
+--- !u!58 &4610756560969618028
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3654616740452175578}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 5
