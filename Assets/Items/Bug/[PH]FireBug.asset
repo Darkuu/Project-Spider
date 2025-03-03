@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34436ff030acfc34ea62e553df066c8d, type: 3}
-  m_Name: PH_EggTwo
+  m_Name: '[PH]FireBug'
   m_EditorClassIdentifier: 
-  type: 2
+  type: 0
   range: {x: 5, y: 4}
   stackable: 1
-  image: {fileID: 4646649027328027380, guid: 5d7db19aac1d36f44a4d486f135249ec, type: 3}
-  bugPlacementPrefab: {fileID: 0}
+  image: {fileID: -5279203824658248110, guid: 240671fa1d34523459ac90486dcb1257, type: 3}
+  bugPlacementPrefab: {fileID: 6008233627096313257, guid: cc8c4bc0fcec5614a83359b2d50c9de7, type: 3}
   isFoodItem: 0
   foodPlacementPrefab: {fileID: 0}
-  isEggItem: 1
-  eggPlacementPrefab: {fileID: 4023120096391451991, guid: 97705acdb01c7f54c93f5fcd0316b227, type: 3}
-  sellValue: 150
+  isEggItem: 0
+  eggPlacementPrefab: {fileID: 0}
+  sellValue: 0

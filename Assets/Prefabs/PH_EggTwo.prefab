@@ -175,5 +175,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba48d26dda35b54cb7a46387bb58364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eggItem: {fileID: 11400000, guid: 43b0d9fff67369243a3ecf12f85dead4, type: 2}
+  eggItem: {fileID: 11400000, guid: eada08164ac5e8a4c96bab3cbeed5a16, type: 2}
   eggType: Normal

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6008233627096313257}
   - component: {fileID: -6591322468981872985}
   m_Layer: 7
-  m_Name: Normal_Bug_World
+  m_Name: '[PH]Fire_Bug'
   m_TagString: Bug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,7 +81,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -5279203824658248110, guid: 240671fa1d34523459ac90486dcb1257, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -176,8 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 322e215baf5fa514581108534c52f556, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bugItem: {fileID: 11400000, guid: 5a7d0b16de83654459a16b452052c29b, type: 2}
-  allowedFoodTag: Food
+  bugItem: {fileID: 11400000, guid: 5ae7e2983be4f9a49842298e02d10c02, type: 2}
+  allowedFoodTag: Food_FireLettuce
   poopPrefab: {fileID: 4023120096391451991, guid: 97705acdb01c7f54c93f5fcd0316b227, type: 3}
 --- !u!114 &-6591322468981872985
 MonoBehaviour:

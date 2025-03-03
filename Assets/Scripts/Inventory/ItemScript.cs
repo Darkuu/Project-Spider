@@ -13,7 +13,6 @@ public class ItemScript : ScriptableObject
     public Sprite image;
 
     [Header("Placement Settings")]
-    // The prefab to instantiate when the item is used (for bug placement).
     public Bug bugPlacementPrefab;
 
     [Header("Food Interaction")]

@@ -182,7 +182,7 @@ MonoBehaviour:
   - {fileID: 731370962342014019}
   - {fileID: 834717955533983398}
   - {fileID: 2164127331050671150}
-  growthTime: 20
+  growthTime: 5
   initialScale: 0.3
 --- !u!61 &279248244280240004
 BoxCollider2D:

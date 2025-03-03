@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34436ff030acfc34ea62e553df066c8d, type: 3}
-  m_Name: PH_BugTwo
+  m_Name: '[PH]FireLettuce'
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   range: {x: 5, y: 4}
   stackable: 1
-  image: {fileID: -5279203824658248110, guid: 240671fa1d34523459ac90486dcb1257, type: 3}
-  bugPlacementPrefab: {fileID: 6008233627096313257, guid: f08de69c28a01d34897049d67883965c, type: 3}
-  isFoodItem: 0
-  foodPlacementPrefab: {fileID: 0}
+  image: {fileID: -273469560937951286, guid: e5c57c7fd0ac8c94a9bf68ba487c7645, type: 3}
+  bugPlacementPrefab: {fileID: 0}
+  isFoodItem: 1
+  foodPlacementPrefab: {fileID: 2350734081240727854, guid: 96d525aadb4b9b743aabc38ebe45e9ab, type: 3}
   isEggItem: 0
   eggPlacementPrefab: {fileID: 0}
   sellValue: 0
