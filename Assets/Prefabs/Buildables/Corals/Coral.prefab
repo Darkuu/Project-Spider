@@ -1850,7 +1850,7 @@ GameObject:
   - component: {fileID: 536117084262846993}
   - component: {fileID: 2880549584774926602}
   - component: {fileID: 3535803851061317914}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Auto Feeder Upgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1892,6 +1892,9 @@ MonoBehaviour:
   dropPoint: {fileID: 1343994507697242457}
   feedInterval: 2
   foodCountText: {fileID: 4340291949981670741}
+  foodLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!61 &3535803851061317914
 BoxCollider2D:
   m_ObjectHideFlags: 0

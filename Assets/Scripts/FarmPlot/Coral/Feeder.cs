@@ -17,6 +17,9 @@ public class Feeder : MonoBehaviour
     [Header("UI")]
     public TMP_Text foodCountText;
 
+    [Header("Food Layer Settings")]
+    public LayerMask foodLayer; // Assign this in the inspector to be the "Food" layer
+
     private List<GameObject> storedFood = new List<GameObject>();
     private int foodCount = 0;
 
@@ -31,20 +34,30 @@ public class Feeder : MonoBehaviour
     {
         if (foodCount >= maxFoodCapacity) return;
 
-        // Lock onto food tag if not set
-        if (foodTag == null)
+        // Check if the object belongs to the "Food" layer
+        if (IsInFoodLayer(other))
         {
-            foodTag = other.tag;
-        }
+            // Lock onto food tag if not set
+            if (foodTag == null)
+            {
+                foodTag = other.tag;
+            }
 
-        // Only collect matching food tag
-        if (other.CompareTag(foodTag) && foodCount < maxFoodCapacity)
-        {
-            other.gameObject.SetActive(false);
-            storedFood.Add(other.gameObject);
-            foodCount++;
-            UpdateFoodCountUI();
+            // Only collect matching food tag
+            if (other.CompareTag(foodTag) && foodCount < maxFoodCapacity)
+            {
+                other.gameObject.SetActive(false);
+                storedFood.Add(other.gameObject);
+                foodCount++;
+                UpdateFoodCountUI();
+            }
         }
+    }
+
+    // Helper method to check if an object is in the "Food" layer
+    private bool IsInFoodLayer(Collider2D other)
+    {
+        return ((foodLayer.value & (1 << other.gameObject.layer)) > 0);
     }
 
     // Feed food from storage at regular intervals
@@ -72,6 +85,7 @@ public class Feeder : MonoBehaviour
         }
     }
 
+    // Update food count UI
     private void UpdateFoodCountUI()
     {
         string foodTagDisplay = foodTag != null ? foodTag : "Any";
