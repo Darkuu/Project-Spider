@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8a596ab09d615eb43a6e99eab77d59b7
+guid: 8f05b646cd257a145905dbc614830294
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 347232466687201579
-    second: PH_FoodDrop_0
+      213: -5646373758153610302
+    second: Food_03_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,19 +97,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -126,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PH_FoodDrop_0
+      name: Food_03_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 297
-        height: 475
+        width: 291
+        height: 279
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b219f57b61e91d400800000000000000
-      internalID: 347232466687201579
+      spriteID: 2cbaa249bfc04a1b0800000000000000
+      internalID: -5646373758153610302
       vertices: []
       indices: 
       edges: []
@@ -160,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      PH_FoodDrop_0: 347232466687201579
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
