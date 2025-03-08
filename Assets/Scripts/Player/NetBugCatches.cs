@@ -7,136 +7,95 @@ public class NetBugCatcher : MonoBehaviour
     public Vector2 offset = Vector2.zero;
 
     [Header("Capture Settings")]
-    public LayerMask bugLayer;
-    public LayerMask foodLayer;
-    public LayerMask eggLayer;
+    public LayerMask captureLayer;
 
-    public Transform player;  // Reference to the player object
+    public Transform player;
 
     private void Start()
     {
-        // Ensure we have a reference to the player
-        if (player == null)
-        {
-            player = GameObject.FindWithTag("Player").transform;  // Assume your player object is tagged "Player"
-        }
+        if (player == null) player = GameObject.FindWithTag("Player").transform;
     }
 
     private void Update()
     {
-        // Rotate and move the net around the player to face the mouse
         RotateAroundPlayer();
 
-        // --- CAPTURE (RIGHT MOUSE BUTTON) ---
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1)) Capture();
+        if (Input.GetMouseButtonDown(0)) PlaceItem();
+    }
+
+    private void Capture()
+    {
+        Vector2 center = (Vector2)transform.position + offset;
+        Collider2D[] hitColliders = Physics2D.OverlapBoxAll(center, boxSize, 0f, captureLayer);
+
+        if (hitColliders.Length == 0)
         {
-            Debug.Log("Right mouse button clicked for capture.");
-
-            Vector2 center = (Vector2)transform.position + offset;
-            Collider2D[] hitColliders = Physics2D.OverlapBoxAll(center, boxSize, 0f, bugLayer | foodLayer | eggLayer);
-
-            if (hitColliders.Length == 0)
-            {
-                Debug.Log("No bugs, food, or eggs found in the capture area.");
-            }
-
-            foreach (Collider2D collider in hitColliders)
-            {
-                // Handle Bugs:
-                Bug bugComp = collider.GetComponent<Bug>();
-                if (bugComp != null && bugComp.bugItem != null)
-                {
-                    if (InventoryManager.instance.AddItem(bugComp.bugItem))
-                    {
-                        Debug.Log("Bug captured and added to the inventory.");
-                        Destroy(collider.gameObject);
-                    }
-                    else Debug.Log("Inventory full or unable to add the bug item.");
-
-                    continue;
-                }
-
-                // Handle Food:
-                Food foodComp = collider.GetComponent<Food>();
-                if (foodComp != null && foodComp.foodItem != null)
-                {
-                    if (InventoryManager.instance.AddItem(foodComp.foodItem))
-                    {
-                        Debug.Log("Food captured and added to the inventory.");
-                        Destroy(collider.gameObject);
-                    }
-                    else Debug.Log("Inventory full or unable to add the food item.");
-
-                    continue;
-                }
-
-                // Handle Eggs:
-                EggItem eggComp = collider.GetComponent<EggItem>();
-                if (eggComp != null)
-                {
-                    if (eggComp.eggItem != null)
-                    {
-                        bool added = InventoryManager.instance.AddItem(eggComp.eggItem);
-                        if (added)
-                        {
-                            Debug.Log("Egg captured and added to the inventory.");
-                            // Remove the egg from the world.
-                            Destroy(collider.gameObject);
-                        }
-                        else
-                        {
-                            Debug.Log("Inventory full or unable to add the egg item.");
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Egg component found but no ItemScript assigned!");
-                    }
-                    // You can continue to the next collider if needed.
-                }
-            }
+            Debug.Log("No bugs, food, or eggs found in the capture area.");
+            return;
         }
 
-        // --- PLACEMENT (LEFT MOUSE BUTTON) ---
-        if (Input.GetMouseButtonDown(0))
+        foreach (Collider2D collider in hitColliders)
         {
-            ItemScript selectedItem = InventoryManager.instance.GetSelectedItem(false);
-            if (selectedItem != null)
+            // Only process colliders that are not triggers
+            if (!collider.isTrigger)
             {
-                Vector2 spawnPosition = (Vector2)transform.position + offset;
+                ItemScript item = TryCaptureItem(collider);
+                if (item != null) Destroy(collider.gameObject);
+            }
+        }
+    }
 
-                if (selectedItem.type == ItemType.Bug || selectedItem.type == ItemType.Food || selectedItem.type == ItemType.Egg)
-                {
-                    InventoryManager.instance.GetSelectedItem(true); // Remove from inventory
-                    selectedItem.Use(spawnPosition);
-                   // Debug.Log($"{selectedItem.type} placed back into the world at {spawnPosition}");
-                }
+
+    private ItemScript TryCaptureItem(Collider2D collider)
+    {
+        // Check if item is valid and add it to inventory
+        ItemScript item = null;
+        
+        if (collider.TryGetComponent(out Bug bugComp) && bugComp.bugItem != null)
+            item = bugComp.bugItem;
+        else if (collider.TryGetComponent(out Food foodComp) && foodComp.foodItem != null)
+            item = foodComp.foodItem;
+        else if (collider.TryGetComponent(out EggItem eggComp) && eggComp.eggItem != null)
+            item = eggComp.eggItem;
+
+        if (item != null && InventoryManager.instance.AddItem(item))
+        {
+            Debug.Log($"{item.type} captured and added to inventory.");
+            return item;
+        }
+        else
+        {
+            Debug.Log("Inventory full or unable to add the item.");
+            return null;
+        }
+    }
+
+    private void PlaceItem()
+    {
+        ItemScript selectedItem = InventoryManager.instance.GetSelectedItem(false);
+        if (selectedItem != null)
+        {
+            Vector2 spawnPosition = (Vector2)transform.position + offset;
+            if (selectedItem.type == ItemType.Bug || selectedItem.type == ItemType.Food || selectedItem.type == ItemType.Egg)
+            {
+                InventoryManager.instance.GetSelectedItem(true); // Remove from inventory
+                selectedItem.Use(spawnPosition);
             }
         }
     }
 
     private void RotateAroundPlayer()
     {
-        // Get the mouse position in world space
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // We're in 2D, so ignore the Z-axis
-
-        // Calculate the direction from the player to the mouse
+        mousePosition.z = 0;
         Vector2 direction = (mousePosition - player.position).normalized;
+        transform.position = (Vector2)player.position + direction * 1f;
 
-        // Calculate the angle from the player to the mouse
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        // Set the position of the net around the player (this keeps it in orbit)
-        float radius = 1f;  // Set a fixed distance from the player (adjustable if needed)
-        Vector2 netPosition = (Vector2)player.position + direction * radius;
-        transform.position = netPosition;
-
-        // Apply the rotation to the net, so it faces the mouse
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    // Optional: Visualize the capture area in Scene view.
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

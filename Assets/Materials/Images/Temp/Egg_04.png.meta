@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 31524904d75a82546b043a1f3ad42f5a
+guid: f95f061515a43f94090998022e562bbe
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2560769565214529253
-    second: Bug_02_0
+      213: 5893251387262507235
+    second: Egg_04_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,19 +97,6 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -126,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bug_02_0
+      name: Egg_04_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 488
-        height: 431
+        width: 222
+        height: 222
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b19a1c1e5a1567cd0800000000000000
-      internalID: -2560769565214529253
+      spriteID: 3e81cd5b9e809c150800000000000000
+      internalID: 5893251387262507235
       vertices: []
       indices: 
       edges: []
@@ -160,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Bug_02_0: -2560769565214529253
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
