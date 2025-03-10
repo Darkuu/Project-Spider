@@ -9,8 +9,8 @@ TagManager:
   - Food
   - Bug
   - Egg
-  - Food_FireLettuce
   - Food_IceBug
+  - Food_FlyBug
   layers:
   - Default
   - TransparentFX
