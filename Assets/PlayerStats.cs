@@ -1,19 +1,22 @@
 using UnityEngine;
+using TMPro; // Import TextMeshPro
 
 public class PlayerStats : MonoBehaviour
 {
-    public float playerMaxHealth;
-
+    public float playerMaxHealth = 100f;
     [SerializeField] private float currentHealth;
 
-    private float iFramesDuration = 2f;  
-    private float iFramesTimer = 0f;     
+    private float iFramesDuration = 2f;
+    private float iFramesTimer = 0f;
+    private bool isInvincible = false;
 
-    private bool isInvincible = false; 
+    [Header("UI Elements")]
+    public TMP_Text healthText; // Assign in Inspector
 
     void Start()
     {
         currentHealth = playerMaxHealth;
+        UpdateHealthUI();
     }
 
     void Update()
@@ -29,12 +32,13 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
-
     public void TakeDamage(int damage)
     {
         if (isInvincible) return;
 
         currentHealth -= damage;
+        UpdateHealthUI(); // Update UI when health changes
+
         if (currentHealth > 0)
         {
             StartIFrames();
@@ -45,7 +49,6 @@ public class PlayerStats : MonoBehaviour
             Die();
         }
     }
-
 
     private void StartIFrames()
     {
@@ -58,5 +61,17 @@ public class PlayerStats : MonoBehaviour
         Debug.Log("Player has died!!!!");
     }
 
+    public void Heal(float healAmount)
+    {
+        currentHealth = Mathf.Min(currentHealth + healAmount, playerMaxHealth);
+        UpdateHealthUI();
+    }
 
+    private void UpdateHealthUI()
+    {
+        if (healthText != null)
+        {
+            healthText.text = $"Health: {currentHealth}/{playerMaxHealth}";
+        }
+    }
 }

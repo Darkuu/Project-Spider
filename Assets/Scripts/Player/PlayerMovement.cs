@@ -22,9 +22,17 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         float speed = GetCurrentSpeed();
-        Vector2 moveDirection = new Vector2(horizontal, vertical).normalized;
-        rb.linearVelocity = moveDirection * speed; // Fixed from 'linearVelocity'
+        // Keep natural diagonal movement speed
+        Vector2 moveDirection = new Vector2(horizontal, vertical);
+        // Prevent excessive speed diagonally
+        if (moveDirection.magnitude > 1)
+        {
+            moveDirection = moveDirection.normalized;
+        }
+
+        rb.linearVelocity = moveDirection * speed; 
     }
+
 
     private float GetCurrentSpeed()
     {
@@ -32,10 +40,9 @@ public class PlayerMovement : MonoBehaviour
         if (PlayerUnlockManager.instance.IsAbilityUnlocked(PlayerUnlockManager.Unlockable.Sprint)
             && Input.GetKey(KeyCode.LeftShift))
         {
-            Debug.Log("Running fast!"); // Debug confirmation
-            return baseSpeed * sprintMultiplier; // Sprinting speed
+            return baseSpeed * sprintMultiplier;
         }
-        return baseSpeed; // Normal speed
+        return baseSpeed;
     }
 
     private void Flip()
