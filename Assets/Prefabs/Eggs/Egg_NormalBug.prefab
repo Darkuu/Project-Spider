@@ -176,4 +176,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eggItem: {fileID: 11400000, guid: 43b0d9fff67369243a3ecf12f85dead4, type: 2}
-  eggType: Normal
+  eggType: EggNormalBug
+  bugPrefab: {fileID: 3654616740452175578, guid: f08de69c28a01d34897049d67883965c, type: 3}
