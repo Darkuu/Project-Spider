@@ -83,9 +83,8 @@ public class ShopTerminal : MonoBehaviour
             playerInRange = false;
             if (shopUI != null)
                 shopUI.SetActive(false);
-            if (interactionPrompt != null)
-            {
-                StartCoroutine(AnimatePrompt(interactionPrompt.transform, Vector3.zero));
+                if (gameObject != null) { 
+                    StartCoroutine(AnimatePrompt(interactionPrompt.transform, Vector3.zero));
                 if (bobbingCoroutine != null)
                 {
                     StopCoroutine(bobbingCoroutine);

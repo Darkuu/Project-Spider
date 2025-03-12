@@ -464,6 +464,7 @@ MonoBehaviour:
   shopUI: {fileID: 3452305960377767277}
   openKey: 101
   spawnPoint: {fileID: 0}
+  interactionPrompt: {fileID: 0}
 --- !u!61 &4007638223946412116
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2823,7 +2824,7 @@ MonoBehaviour:
   price: 250
   itemPrefab: {fileID: 0}
   itemToActivate: {fileID: 6544272286115129720}
-  disableAfterPurchase: 0
+  disableAfterPurchase: 1
   priceText: {fileID: 5809727284385584731}
 --- !u!1 &7812658316151703731
 GameObject:

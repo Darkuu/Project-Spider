@@ -11,6 +11,7 @@ TagManager:
   - Egg
   - Food_IceBug
   - Food_FlyBug
+  - Food_SandBug
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - UI
   - Player
   - Bug
-  - BoundyBox
+  - BoundryBox
   - BugNet
   - Food
   - Egg

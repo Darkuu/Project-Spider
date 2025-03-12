@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34436ff030acfc34ea62e553df066c8d, type: 3}
+  m_Name: Egg_IceBug
+  m_EditorClassIdentifier: 
+  type: 2
+  range: {x: 5, y: 4}
+  stackable: 1
+  image: {fileID: 5893251387262507235, guid: f95f061515a43f94090998022e562bbe, type: 3}
+  bugPlacementPrefab: {fileID: 0}
+  isFoodItem: 0
+  foodPlacementPrefab: {fileID: 0}
+  isEggItem: 1
+  eggPlacementPrefab: {fileID: 4023120096391451991, guid: ce0c5bacc041d4b4ab788810f587ea36, type: 3}
+  sellValue: 200
