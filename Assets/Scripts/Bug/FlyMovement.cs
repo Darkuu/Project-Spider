@@ -4,8 +4,13 @@ using UnityEngine;
 public class FlyMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
-    [SerializeField] private float changeDirectionTime;
-    [SerializeField] private float waitTime;
+
+    [Header("Random Time Settings")]
+    [SerializeField] private float minChangeDirectionTime = 1f;
+    [SerializeField] private float maxChangeDirectionTime = 3f;
+    [SerializeField] private float minWaitTime = 0.5f;
+    [SerializeField] private float maxWaitTime = 2f;
+
     private Vector2 moveDirection;
     private Rigidbody2D rb;
 
@@ -25,11 +30,13 @@ public class FlyMovement : MonoBehaviour
     {
         while (true)
         {
-            moveDirection = Vector2.zero; 
-            yield return new WaitForSeconds(waitTime); 
+            moveDirection = Vector2.zero;
+            float waitDuration = Random.Range(minWaitTime, maxWaitTime);
+            yield return new WaitForSeconds(waitDuration);
 
-            moveDirection = GetRandomDirection(); 
-            yield return new WaitForSeconds(changeDirectionTime);
+            moveDirection = GetRandomDirection();
+            float moveDuration = Random.Range(minChangeDirectionTime, maxChangeDirectionTime);
+            yield return new WaitForSeconds(moveDuration);
         }
     }
 

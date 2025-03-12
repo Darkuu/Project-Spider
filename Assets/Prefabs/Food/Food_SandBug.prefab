@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1210845039943308658}
   m_Layer: 10
   m_Name: Food_SandBug
-  m_TagString: Food_FlyBug
+  m_TagString: Food_SandBug
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

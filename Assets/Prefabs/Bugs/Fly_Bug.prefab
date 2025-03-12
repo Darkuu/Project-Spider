@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bugItem: {fileID: 11400000, guid: 5ae7e2983be4f9a49842298e02d10c02, type: 2}
-  allowedFoodTag: Food_FlyFood
+  allowedFoodTag: Food_FlyBug
   poopPrefab: {fileID: 4023120096391451991, guid: 97705acdb01c7f54c93f5fcd0316b227, type: 3}
   damage: 0
   isHostile: 0

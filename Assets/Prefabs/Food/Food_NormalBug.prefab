@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1986613399910568232}
   - component: {fileID: 6759334500660345613}
   m_Layer: 10
-  m_Name: 'Food_NormalBug]'
+  m_Name: Food_NormalBug
   m_TagString: Food
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
