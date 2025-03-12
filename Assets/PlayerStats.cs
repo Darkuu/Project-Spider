@@ -6,10 +6,10 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private float currentHealth;
 
-    private float iFramesDuration = 1f;  // Duration of invincibility frames (in seconds)
-    private float iFramesTimer = 0f;     // Timer to track iFrame duration
+    private float iFramesDuration = 2f;  
+    private float iFramesTimer = 0f;     
 
-    private bool isInvincible = false;   // Flag to track if the player is invincible
+    private bool isInvincible = false; 
 
     void Start()
     {
@@ -18,7 +18,6 @@ public class PlayerStats : MonoBehaviour
 
     void Update()
     {
-        // Decrease iFrames timer over time, making player invincible for a limited time
         if (isInvincible)
         {
             iFramesTimer -= Time.deltaTime;
@@ -29,6 +28,7 @@ public class PlayerStats : MonoBehaviour
             }
         }
     }
+
 
     public void TakeDamage(int damage)
     {
@@ -57,4 +57,6 @@ public class PlayerStats : MonoBehaviour
     {
         Debug.Log("Player has died!!!!");
     }
+
+
 }

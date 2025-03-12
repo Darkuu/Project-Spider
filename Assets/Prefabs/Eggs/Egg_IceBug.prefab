@@ -176,4 +176,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eggItem: {fileID: 11400000, guid: 60bdc427e8f7674499c6b956707f8cc7, type: 2}
+  sellValue: 500
   eggType: IceBugEgg

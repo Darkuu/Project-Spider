@@ -21,4 +21,4 @@ MonoBehaviour:
   foodPlacementPrefab: {fileID: 0}
   isEggItem: 1
   eggPlacementPrefab: {fileID: 4023120096391451991, guid: 97705acdb01c7f54c93f5fcd0316b227, type: 3}
-  sellValue: 150
+  sellValue: 1
