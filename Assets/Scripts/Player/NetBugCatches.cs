@@ -4,7 +4,6 @@ public class NetBugCatcher : MonoBehaviour
 {
     [Header("Net Settings")]
     public Vector2 boxSize = new Vector2(3f, 3f);
-    public Vector2 offset = Vector2.zero;
 
     [Header("Capture Settings")]
     public LayerMask captureLayer;
@@ -18,23 +17,24 @@ public class NetBugCatcher : MonoBehaviour
 
     private void Update()
     {
-        if (UIManager.instance.isUIOpen) return; 
+        if (UIManager.instance.isUIOpen) return;
 
         RotateAroundPlayer();
-
         if (Input.GetMouseButtonDown(1)) Capture();
         if (Input.GetMouseButtonDown(0)) PlaceItem();
     }
 
-
     private void Capture()
     {
-        Vector2 center = (Vector2)transform.position + offset;
-        Collider2D[] hitColliders = Physics2D.OverlapBoxAll(center, boxSize, 0f, captureLayer);
+        // Get the center of the box and the rotation to apply
+        Vector2 center = (Vector2)transform.position;
+        float rotation = transform.rotation.eulerAngles.z;
+
+        // Use the OverlapBox method that allows rotation of the box
+        Collider2D[] hitColliders = Physics2D.OverlapBoxAll(center, boxSize, rotation, captureLayer);
 
         if (hitColliders.Length == 0)
         {
-            Debug.Log("No bugs, food, or eggs found in the capture area.");
             return;
         }
 
@@ -49,12 +49,11 @@ public class NetBugCatcher : MonoBehaviour
         }
     }
 
-
     private ItemScript TryCaptureItem(Collider2D collider)
     {
         // Check if item is valid and add it to inventory
         ItemScript item = null;
-        
+
         if (collider.TryGetComponent(out Bug bugComp) && bugComp.bugItem != null)
             item = bugComp.bugItem;
         else if (collider.TryGetComponent(out Food foodComp) && foodComp.foodItem != null)
@@ -64,12 +63,10 @@ public class NetBugCatcher : MonoBehaviour
 
         if (item != null && InventoryManager.instance.AddItem(item))
         {
-            Debug.Log($"{item.type} captured and added to inventory.");
             return item;
         }
         else
         {
-            Debug.Log("Inventory full or unable to add the item.");
             return null;
         }
     }
@@ -79,7 +76,7 @@ public class NetBugCatcher : MonoBehaviour
         ItemScript selectedItem = InventoryManager.instance.GetSelectedItem(false);
         if (selectedItem != null)
         {
-            Vector2 spawnPosition = (Vector2)transform.position + offset;
+            Vector2 spawnPosition = (Vector2)transform.position;
             if (selectedItem.type == ItemType.Bug || selectedItem.type == ItemType.Food || selectedItem.type == ItemType.Egg)
             {
                 InventoryManager.instance.GetSelectedItem(true); // Remove from inventory
@@ -90,10 +87,11 @@ public class NetBugCatcher : MonoBehaviour
 
     private void RotateAroundPlayer()
     {
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0;
-        Vector2 direction = (mousePosition - player.position).normalized;
-        transform.position = (Vector2)player.position + direction * 1f;
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 playerPos2D = (Vector2)player.position;
+
+        Vector2 direction = (mousePosition - playerPos2D).normalized;
+        transform.position = playerPos2D + direction * 1f;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
@@ -102,7 +100,13 @@ public class NetBugCatcher : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Vector2 center = (Vector2)transform.position + offset;
-        Gizmos.DrawWireCube(center, boxSize);
+
+        // Get the center of the box and the rotation to apply
+        Vector2 center = (Vector2)transform.position;
+        float rotation = transform.rotation.eulerAngles.z;
+
+        // Draw the rotated box for Gizmos
+        Gizmos.matrix = Matrix4x4.TRS(center, Quaternion.Euler(0, 0, rotation), Vector3.one);
+        Gizmos.DrawWireCube(Vector2.zero, boxSize);
     }
 }
