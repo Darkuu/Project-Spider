@@ -1486,7 +1486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3933e75156266b84d8af160f0a1896be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 250
+  price: 5
   itemPrefab: {fileID: 0}
   itemToActivate: {fileID: 5649522729074275289}
   disableAfterPurchase: 1
@@ -2130,7 +2130,7 @@ MonoBehaviour:
   collectionCollider: {fileID: 3535803851061317914}
   maxFoodCapacity: 20
   dropPoint: {fileID: 1343994507697242457}
-  feedInterval: 2
+  feedInterval: 10
   foodCountText: {fileID: 4340291949981670741}
   foodLayer:
     serializedVersion: 2
@@ -3060,7 +3060,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3933e75156266b84d8af160f0a1896be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 250
+  price: 5
   itemPrefab: {fileID: 0}
   itemToActivate: {fileID: 6544272286115129720}
   disableAfterPurchase: 1
