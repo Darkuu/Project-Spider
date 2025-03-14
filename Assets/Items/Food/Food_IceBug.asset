@@ -15,7 +15,7 @@ MonoBehaviour:
   type: 1
   range: {x: 5, y: 4}
   stackable: 1
-  image: {fileID: 3034105837148419695, guid: 6a191451a4a8a324c815e110c3ddb645, type: 3}
+  image: {fileID: -5618060813382403761, guid: 66fff8efbc2be2644aad0ce13e3f0594, type: 3}
   bugPlacementPrefab: {fileID: 0}
   isFoodItem: 1
   foodPlacementPrefab: {fileID: 5596506518270907952, guid: 26f8e18d0d7c47646b01b156ff54bb94, type: 3}
