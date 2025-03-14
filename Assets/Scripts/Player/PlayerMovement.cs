@@ -5,8 +5,8 @@ public class PlayerMovement : MonoBehaviour
     private float horizontal;
     private float vertical;
 
-    private float baseSpeed = 8f; // Default speed
-    private float sprintMultiplier = 1.5f; // Sprint speed multiplier
+    [SerializeField] private float baseSpeed = 8f; // Default speed
+    [SerializeField] private float sprintMultiplier = 1.5f; // Sprint speed multiplier
     private bool isFacingRight = true;
 
     [SerializeField] private Rigidbody2D rb;
