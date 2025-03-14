@@ -18,11 +18,14 @@ public class NetBugCatcher : MonoBehaviour
 
     private void Update()
     {
+        if (UIManager.instance.isUIOpen) return; 
+
         RotateAroundPlayer();
 
         if (Input.GetMouseButtonDown(1)) Capture();
         if (Input.GetMouseButtonDown(0)) PlaceItem();
     }
+
 
     private void Capture()
     {
