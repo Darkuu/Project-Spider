@@ -90,6 +90,7 @@ public class ShopTerminal : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            UIManager.instance.CloseUI();
             if (shopUI != null)
                 shopUI.SetActive(false);
                 if (gameObject != null) { 
