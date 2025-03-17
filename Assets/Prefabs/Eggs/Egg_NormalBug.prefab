@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1119273552852384265}
   - component: {fileID: 2578721537071027653}
   - component: {fileID: 262653530833628968}
+  - component: {fileID: -1313487040816751497}
   m_Layer: 11
   m_Name: Egg_NormalBug
   m_TagString: Egg
@@ -178,3 +179,16 @@ MonoBehaviour:
   eggItem: {fileID: 11400000, guid: 43b0d9fff67369243a3ecf12f85dead4, type: 2}
   eggType: EggNormalBug
   bugPrefab: {fileID: 3654616740452175578, guid: f08de69c28a01d34897049d67883965c, type: 3}
+--- !u!114 &-1313487040816751497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4023120096391451991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 642ee0ae190c1bc40a4c8a86e4e472d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyTime: 60

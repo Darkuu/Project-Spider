@@ -6,6 +6,7 @@ public class ShopTerminal : MonoBehaviour
 {
     public GameObject shopUI;
     public KeyCode openKey = KeyCode.E;
+    public KeyCode closeKey = KeyCode.Escape;
     private bool playerInRange = false;
 
     [Header("Spawn Settings")]
@@ -36,6 +37,11 @@ public class ShopTerminal : MonoBehaviour
         {
             ToggleShop();
         }
+
+        if (shopUI.activeSelf && Input.GetKeyDown(closeKey))
+        {
+            CloseTerminal();
+        }
     }
 
     void ToggleShop()
@@ -64,12 +70,19 @@ public class ShopTerminal : MonoBehaviour
         }
     }
 
-
     public void CloseAndRemoveTerminal()
     {
-        if (shopUI != null)
-            shopUI.SetActive(false);
+        CloseTerminal();
         Destroy(gameObject);
+    }
+
+    public void CloseTerminal()
+    {
+        if (shopUI != null)
+        {
+            shopUI.SetActive(false);
+            UIManager.instance.CloseUI();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -80,7 +93,10 @@ public class ShopTerminal : MonoBehaviour
             if (interactionPrompt != null)
             {
                 StartCoroutine(AnimatePrompt(interactionPrompt.transform, Vector3.one));
-                bobbingCoroutine = StartCoroutine(BobPrompt(interactionPrompt.transform));
+                if (bobbingCoroutine == null)
+                {
+                    bobbingCoroutine = StartCoroutine(BobPrompt(interactionPrompt.transform));
+                }
             }
         }
     }
@@ -90,16 +106,18 @@ public class ShopTerminal : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
-            UIManager.instance.CloseUI();
-            if (shopUI != null)
-                shopUI.SetActive(false);
-                if (gameObject != null) { 
-                    StartCoroutine(AnimatePrompt(interactionPrompt.transform, Vector3.zero));
-                if (bobbingCoroutine != null)
-                {
-                    StopCoroutine(bobbingCoroutine);
-                    bobbingCoroutine = null;
-                }
+            CloseTerminal();
+
+            // Only start animation if the object is active
+            if (gameObject.activeInHierarchy && interactionPrompt != null)
+            {
+                StartCoroutine(AnimatePrompt(interactionPrompt.transform, Vector3.zero));
+            }
+
+            if (bobbingCoroutine != null)
+            {
+                StopCoroutine(bobbingCoroutine);
+                bobbingCoroutine = null;
             }
         }
     }
@@ -111,6 +129,7 @@ public class ShopTerminal : MonoBehaviour
 
         while (elapsedTime < promptAnimationDuration)
         {
+            if (!gameObject.activeInHierarchy) yield break; // Stop coroutine if object is inactive
             promptTransform.localScale = Vector3.Lerp(initialScale, targetScale, elapsedTime / promptAnimationDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
@@ -124,6 +143,7 @@ public class ShopTerminal : MonoBehaviour
         Vector3 startPos = promptTransform.localPosition;
         while (true)
         {
+            if (!gameObject.activeInHierarchy) yield break; // Stop coroutine if object is inactive
             float newY = startPos.y + Mathf.Sin(Time.time * bobbingSpeed) * bobbingAmount;
             promptTransform.localPosition = new Vector3(startPos.x, newY, startPos.z);
             yield return null;
