@@ -137,10 +137,10 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 3
-        width: 85
-        height: 319
+        width: 530
+        height: 313
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -153,55 +153,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: BrokenBridgeFront_1
-      rect:
-        serializedVersion: 2
-        x: 230
-        y: 0
-        width: 91
-        height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 77addd8033a340950800000000000000
-      internalID: 6414315760148929143
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BrokenBridgeFront_2
-      rect:
-        serializedVersion: 2
-        x: 443
-        y: 0
-        width: 86
-        height: 319
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 83aa8cb0a3bbfd390800000000000000
-      internalID: -7791302972347471304
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b3b4fc55b7d4def4b9f6864714ed6d60
     internalID: 0
     vertices: []
     indices: 

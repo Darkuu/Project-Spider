@@ -7,12 +7,14 @@ public class NetBugCatcher : MonoBehaviour
 
     [Header("Capture Settings")]
     public LayerMask captureLayer;
-
     public Transform player;
+
+    private TutorialPopup tutorialPopup; // Reference to tutorial popup
 
     private void Start()
     {
         if (player == null) player = GameObject.FindWithTag("Player").transform;
+        tutorialPopup = FindObjectOfType<TutorialPopup>(); // Find the tutorial popup in the scene
     }
 
     private void Update()
@@ -26,21 +28,14 @@ public class NetBugCatcher : MonoBehaviour
 
     private void Capture()
     {
-        // Get the center of the box and the rotation to apply
         Vector2 center = (Vector2)transform.position;
         float rotation = transform.rotation.eulerAngles.z;
-
-        // Use the OverlapBox method that allows rotation of the box
         Collider2D[] hitColliders = Physics2D.OverlapBoxAll(center, boxSize, rotation, captureLayer);
 
-        if (hitColliders.Length == 0)
-        {
-            return;
-        }
+        if (hitColliders.Length == 0) return;
 
         foreach (Collider2D collider in hitColliders)
         {
-            // Only process colliders that are not triggers
             if (!collider.isTrigger)
             {
                 ItemScript item = TryCaptureItem(collider);
@@ -51,15 +46,34 @@ public class NetBugCatcher : MonoBehaviour
 
     private ItemScript TryCaptureItem(Collider2D collider)
     {
-        // Check if item is valid and add it to inventory
         ItemScript item = null;
 
         if (collider.TryGetComponent(out Bug bugComp) && bugComp.bugItem != null)
+        {
             item = bugComp.bugItem;
+
+            // Notify tutorial to close if it was waiting for a bug capture
+            if (tutorialPopup != null)
+            {
+                tutorialPopup.CompleteStep("CatchBug");
+            }
+        }
         else if (collider.TryGetComponent(out Food foodComp) && foodComp.foodItem != null)
+        {
             item = foodComp.foodItem;
+            if (tutorialPopup != null)
+            {
+                tutorialPopup.CompleteStep("CatchFood");
+            }
+        }
         else if (collider.TryGetComponent(out EggItem eggComp) && eggComp.eggItem != null)
+        {
             item = eggComp.eggItem;
+            if (tutorialPopup != null)
+            {
+                tutorialPopup.CompleteStep("CatchEgg");
+            }
+        }
 
         if (item != null && InventoryManager.instance.AddItem(item))
         {
@@ -79,7 +93,7 @@ public class NetBugCatcher : MonoBehaviour
             Vector2 spawnPosition = (Vector2)transform.position;
             if (selectedItem.type == ItemType.Bug || selectedItem.type == ItemType.Food || selectedItem.type == ItemType.Egg)
             {
-                InventoryManager.instance.GetSelectedItem(true); // Remove from inventory
+                InventoryManager.instance.GetSelectedItem(true);
                 selectedItem.Use(spawnPosition);
             }
         }
@@ -100,12 +114,9 @@ public class NetBugCatcher : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-
-        // Get the center of the box and the rotation to apply
         Vector2 center = (Vector2)transform.position;
         float rotation = transform.rotation.eulerAngles.z;
 
-        // Draw the rotated box for Gizmos
         Gizmos.matrix = Matrix4x4.TRS(center, Quaternion.Euler(0, 0, rotation), Vector3.one);
         Gizmos.DrawWireCube(Vector2.zero, boxSize);
     }
