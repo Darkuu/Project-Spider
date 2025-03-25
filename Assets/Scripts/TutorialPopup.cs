@@ -8,26 +8,27 @@ public class TutorialPopup : MonoBehaviour
     [System.Serializable]
     public class TutorialStep
     {
-        public string message; // The tutorial message to display
-        public Sprite icon;    // Optional icon for the tutorial
-        public string actionToComplete; // The action that dismisses this step
-        public GameObject triggerZone; // The trigger that activates this step (optional)
-        public bool autoTriggerNextStep; // If true, this step triggers after the last step
+        public string title;
+        public string description;
+        public Sprite icon;    
+        public string actionToComplete; 
+        public GameObject triggerZone; 
+        public bool autoTriggerNextStep; 
     }
 
-    public List<TutorialStep> tutorialSteps; // List of tutorial steps
-    public GameObject popupUI;  // The UI Panel for the tutorial
-    public TMP_Text messageText; // UI Text to display the message
-    public Image iconImage; // UI Image for the icon (optional)
+    public List<TutorialStep> tutorialSteps; 
+    public GameObject popupUI;  
+    public TMP_Text titleText;
+    public TMP_Text descriptionText;
+    public Image iconImage; 
 
     private int currentStep = -1;
     private bool isTutorialActive = false;
 
     private void Start()
     {
-        popupUI.SetActive(false); // Hide tutorial on start
+        popupUI.SetActive(false); 
 
-        // Enable all trigger zones at start and assign trigger detection
         foreach (var step in tutorialSteps)
         {
             if (step.triggerZone != null)
@@ -45,12 +46,12 @@ public class TutorialPopup : MonoBehaviour
         currentStep = stepIndex;
         TutorialStep step = tutorialSteps[stepIndex];
 
-        // Disable the trigger for this step if it has one
         if (step.triggerZone != null)
             step.triggerZone.SetActive(false);
 
         popupUI.SetActive(true);
-        messageText.text = step.message;
+        titleText.text = step.title;
+        descriptionText.text = step.description;
 
         if (step.icon != null)
         {
@@ -79,7 +80,7 @@ public class TutorialPopup : MonoBehaviour
             {
                 if (tutorialSteps[nextStep].autoTriggerNextStep)
                 {
-                    ShowTutorialStep(nextStep); // Automatically show the next step
+                    ShowTutorialStep(nextStep); 
                 }
             }
         }
@@ -91,7 +92,7 @@ public class TutorialPopup : MonoBehaviour
         int nextStep = currentStep + 1;
         if (nextStep < tutorialSteps.Count)
         {
-            ShowTutorialStep(nextStep); // Automatically show the next step
+            ShowTutorialStep(nextStep); 
         }
     }
 }
