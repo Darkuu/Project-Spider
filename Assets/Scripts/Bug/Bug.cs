@@ -12,33 +12,52 @@ public class Bug : MonoBehaviour
     [Tooltip("What it poops out upon eating")]
     public GameObject poopPrefab;
 
+    [Header("Bug Brain Logic")]
+    [Tooltip("Cooldown between eating")]
+    public float cooldownTime = 30f; 
+
     [Tooltip("What it poops out upon eating")]
     public int damage;
 
     public bool isHostile;
 
-    // Automatically eats food when the bug collides with it.
+    private float cooldownTimer;
+   
+
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag(allowedFoodTag))
+        if (other.gameObject.CompareTag(allowedFoodTag) && cooldownTimer <= 0f)
         {
             DropPoop();
             Destroy(other.gameObject);
+            cooldownTimer = cooldownTime;
         }
         else if (other.gameObject.CompareTag("Player") && isHostile)
         {
             PlayerStats playerHealth = other.gameObject.GetComponent<PlayerStats>();
             if (playerHealth != null)
             {
-                // Apply damage and pass the bug's position for knockback
                 playerHealth.TakeDamage(damage);
             }
         }
     }
 
-    // Drops a poop at the bug's current position.
     void DropPoop()
     {
         Instantiate(poopPrefab, transform.position, Quaternion.identity);
+    }
+
+    // Update is called once per frame
+
+    private void Start()
+    {
+        cooldownTimer = cooldownTime;
+    }
+    private void Update()
+    {
+        if (cooldownTimer > 0f)
+        {
+            cooldownTimer -= Time.deltaTime;
+        }
     }
 }
