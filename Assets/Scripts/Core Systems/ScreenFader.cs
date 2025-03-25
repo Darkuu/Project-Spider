@@ -6,32 +6,41 @@ public class ScreenFader : MonoBehaviour
 {
     public static ScreenFader instance;
     private Image fadeImage;
-    public float fadeDuration = 1f; 
-    public float fadeHoldDuration = 2f; 
+    public float fadeDuration = 1f;
+    public float fadeHoldDuration = 2f;
 
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
+            return;
         }
 
         fadeImage = GetComponent<Image>();
+
+        fadeImage.color = new Color(0, 0, 0, 1);
+    }
+
+    private void Start()
+    {
+        StartCoroutine(FadeFromBlack());
     }
 
     public IEnumerator FadeToBlack()
     {
-        yield return StartCoroutine(Fade(1f));  
+        yield return StartCoroutine(Fade(1f));
         yield return new WaitForSeconds(fadeHoldDuration);
     }
 
     public IEnumerator FadeFromBlack()
     {
-        yield return StartCoroutine(Fade(0f));  
+        yield return StartCoroutine(Fade(0f));
     }
 
     private IEnumerator Fade(float targetAlpha)
