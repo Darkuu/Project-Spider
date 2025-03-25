@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 
@@ -8,26 +9,34 @@ public class TutorialPopup : MonoBehaviour
     [System.Serializable]
     public class TutorialStep
     {
+        [Header("Tutorial Step Properties")]
         public string title;
         public string description;
-        public Sprite icon;    
-        public string actionToComplete; 
-        public GameObject triggerZone; 
-        public bool autoTriggerNextStep; 
+        public Sprite icon;
+        public string actionToComplete;
+        public GameObject triggerZone;
+        public bool autoTriggerNextStep;
     }
 
-    public List<TutorialStep> tutorialSteps; 
-    public GameObject popupUI;  
+    [Header("Tutorial Steps")]
+    public List<TutorialStep> tutorialSteps;
+
+    [Header("Assignables")]
+    public GameObject popupUI;
     public TMP_Text titleText;
     public TMP_Text descriptionText;
-    public Image iconImage; 
+    public Image iconImage;
+    public AudioSource notificationSound;
+    public AudioSource tutorialStepCompleteSound;
+
+    public float stepDelay = 2f; 
 
     private int currentStep = -1;
     private bool isTutorialActive = false;
 
     private void Start()
     {
-        popupUI.SetActive(false); 
+        popupUI.SetActive(false);
 
         foreach (var step in tutorialSteps)
         {
@@ -37,6 +46,16 @@ public class TutorialPopup : MonoBehaviour
                 step.triggerZone.AddComponent<TutorialStepTrigger>().Setup(this, tutorialSteps.IndexOf(step));
             }
         }
+
+        if (tutorialSteps.Count > 0)
+        {
+            Invoke(nameof(StartTutorial), stepDelay);
+        }
+    }
+
+    private void StartTutorial()
+    {
+        ShowTutorialStep(0);
     }
 
     public void ShowTutorialStep(int stepIndex)
@@ -52,6 +71,7 @@ public class TutorialPopup : MonoBehaviour
         popupUI.SetActive(true);
         titleText.text = step.title;
         descriptionText.text = step.description;
+        notificationSound.Play();
 
         if (step.icon != null)
         {
@@ -72,6 +92,7 @@ public class TutorialPopup : MonoBehaviour
 
         if (tutorialSteps[currentStep].actionToComplete == action)
         {
+            tutorialStepCompleteSound.Play();
             popupUI.SetActive(false);
             isTutorialActive = false;
 
@@ -80,24 +101,22 @@ public class TutorialPopup : MonoBehaviour
             {
                 if (tutorialSteps[nextStep].autoTriggerNextStep)
                 {
-                    ShowTutorialStep(nextStep); 
+                    Invoke(nameof(TriggerNextStep), stepDelay); 
                 }
             }
         }
     }
 
-    // This method is used when the tutorial is triggered by zone instead of completing a step
     public void TriggerNextStep()
     {
         int nextStep = currentStep + 1;
         if (nextStep < tutorialSteps.Count)
         {
-            ShowTutorialStep(nextStep); 
+            ShowTutorialStep(nextStep);
         }
     }
 }
 
-// This class is automatically added to tutorial trigger zones
 class TutorialStepTrigger : MonoBehaviour
 {
     private TutorialPopup tutorialPopup;
@@ -113,7 +132,12 @@ class TutorialStepTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            tutorialPopup.ShowTutorialStep(stepIndex);
+            tutorialPopup.Invoke(nameof(DelayedStepTrigger), tutorialPopup.stepDelay);
         }
+    }
+
+    private void DelayedStepTrigger()
+    {
+        tutorialPopup.ShowTutorialStep(stepIndex);
     }
 }

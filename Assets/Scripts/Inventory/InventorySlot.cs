@@ -6,24 +6,30 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 {
  public Image image;
  public Color selectedColour, notSelectedColour;
+    private Vector3 originalScale;
+    private Vector3 selectedScale;
 
 
- private void Awake()
- {
-  Deselect();
- }
- public void Select()
- {
-  image.color = selectedColour;
- }
+    private void Awake()
+    {
+        originalScale = transform.localScale; 
+        selectedScale = originalScale * 1.1f; 
+        Deselect();
+    }
 
- public void Deselect()
- {
-  image.color = notSelectedColour;
+    public void Select()
+    {
+        image.color = selectedColour;
+        transform.localScale = selectedScale; 
+    }
 
- }
- 
- public void OnDrop(PointerEventData eventData)
+    public void Deselect()
+    {
+        image.color = notSelectedColour;
+        transform.localScale = originalScale; 
+    }
+
+    public void OnDrop(PointerEventData eventData)
 
  {
   if(transform.childCount == 0)

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class NetBugCatcher : MonoBehaviour
 {
@@ -9,12 +10,20 @@ public class NetBugCatcher : MonoBehaviour
     public LayerMask captureLayer;
     public Transform player;
 
-    private TutorialPopup tutorialPopup; // Reference to tutorial popup
+    [Header("Placement Settings")]
+    public float initialDropCooldown = 0.5f;  // Start delay between drops
+    public float minDropCooldown = 0.1f;      // Minimum drop speed
+    public float dropAcceleration = 0.05f;    // How much the cooldown decreases per drop
+
+    private float currentDropCooldown;
+    private bool isPlacing;
+    private TutorialPopup tutorialPopup;
 
     private void Start()
     {
         if (player == null) player = GameObject.FindWithTag("Player").transform;
-        tutorialPopup = FindObjectOfType<TutorialPopup>(); // Find the tutorial popup in the scene
+        tutorialPopup = FindObjectOfType<TutorialPopup>();
+        currentDropCooldown = initialDropCooldown;
     }
 
     private void Update()
@@ -22,8 +31,18 @@ public class NetBugCatcher : MonoBehaviour
         if (UIManager.instance.isUIOpen) return;
 
         RotateAroundPlayer();
+
         if (Input.GetMouseButtonDown(1)) Capture();
-        if (Input.GetMouseButtonDown(0)) PlaceItem();
+
+        if (Input.GetMouseButtonDown(0) && !isPlacing)
+        {
+            StartCoroutine(PlaceItemRoutine());
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            isPlacing = false;
+            currentDropCooldown = initialDropCooldown; // Reset cooldown when button is released
+        }
     }
 
     private void Capture()
@@ -51,38 +70,37 @@ public class NetBugCatcher : MonoBehaviour
         if (collider.TryGetComponent(out Bug bugComp) && bugComp.bugItem != null)
         {
             item = bugComp.bugItem;
-
-            // Notify tutorial to close if it was waiting for a bug capture
-            if (tutorialPopup != null)
-            {
-                tutorialPopup.CompleteStep("CatchBug");
-            }
+            tutorialPopup?.CompleteStep("CatchBug");
         }
         else if (collider.TryGetComponent(out Food foodComp) && foodComp.foodItem != null)
         {
             item = foodComp.foodItem;
-            if (tutorialPopup != null)
-            {
-                tutorialPopup.CompleteStep("CatchFood");
-            }
+            tutorialPopup?.CompleteStep("CatchFood");
         }
         else if (collider.TryGetComponent(out EggItem eggComp) && eggComp.eggItem != null)
         {
             item = eggComp.eggItem;
-            if (tutorialPopup != null)
-            {
-                tutorialPopup.CompleteStep("CatchEgg");
-            }
+            tutorialPopup?.CompleteStep("CatchEgg");
         }
 
-        if (item != null && InventoryManager.instance.AddItem(item))
+        return (item != null && InventoryManager.instance.AddItem(item)) ? item : null;
+    }
+
+    private IEnumerator PlaceItemRoutine()
+    {
+        isPlacing = true;
+
+        while (Input.GetMouseButton(0))
         {
-            return item;
+            PlaceItem();
+            yield return new WaitForSeconds(currentDropCooldown);
+
+            // Gradually decrease cooldown but never go below minDropCooldown
+            currentDropCooldown = Mathf.Max(minDropCooldown, currentDropCooldown - dropAcceleration);
         }
-        else
-        {
-            return null;
-        }
+
+        isPlacing = false;
+        currentDropCooldown = initialDropCooldown; // Reset cooldown when releasing
     }
 
     private void PlaceItem()
