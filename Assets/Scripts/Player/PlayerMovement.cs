@@ -7,7 +7,6 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float baseSpeed = 8f; 
     [SerializeField] private float sprintMultiplier = 1.5f; 
-    private bool isFacingRight = true;
 
     [SerializeField] private Rigidbody2D rb;
 
@@ -16,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
        {
-            tutorialPopup = FindObjectOfType<TutorialPopup>(); // Find the tutorial popup in the scene
+            tutorialPopup = FindObjectOfType<TutorialPopup>(); 
         }
     }
 
@@ -24,8 +23,6 @@ public class PlayerMovement : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
-
-        Flip(); 
     }
 
     private void FixedUpdate()
@@ -63,14 +60,4 @@ public class PlayerMovement : MonoBehaviour
         return baseSpeed;
     }
 
-    private void Flip()
-    {
-        if (isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f)
-        {
-            isFacingRight = !isFacingRight;
-            Vector3 localScale = transform.localScale;
-            localScale.x *= -1f;
-            transform.localScale = localScale;
-        }
-    }
 }

@@ -12,6 +12,7 @@ TagManager:
   - Food_IceBug
   - Food_FlyBug
   - Food_SandBug
+  - Camera
   layers:
   - Default
   - TransparentFX
