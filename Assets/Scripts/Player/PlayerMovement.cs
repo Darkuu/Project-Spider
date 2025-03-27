@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
        {
-            tutorialPopup = FindObjectOfType<TutorialPopup>(); 
+            tutorialPopup = FindFirstObjectByType<TutorialPopup>(); 
         }
     }
 

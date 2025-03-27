@@ -3,9 +3,12 @@ using TMPro; // Import TextMeshPro
 using UnityEngine.UI; // Import UI elements
 using Unity.Cinemachine; // Import Cinemachine
 using System.Collections;
+using UnityEditor.Build.Content;
 
 public class PlayerStats : MonoBehaviour
 {
+    [Header("Health Settings")]
+    public TMP_Text healthText;
     public float playerMaxHealth = 100f;
     [SerializeField] private float currentHealth;
 
@@ -13,19 +16,19 @@ public class PlayerStats : MonoBehaviour
     private bool isInvincible = false;
 
     private float regenCooldown = 20f;
-    private float regenRate = 5f; // Health per second
+    private float regenRate = 5f; 
     private Coroutine regenCoroutine;
 
-    [Header("UI Elements")]
-    public TMP_Text healthText;
-    public GameObject deathUI; // Assign this in the Inspector
+    [Header("Death Elements")]
+    public GameObject deathUI;
+    public AudioClip deathSound;
 
     [Header("Respawn Settings")]
-    public Transform respawnPoint; // Assign this in the Inspector
+    public Transform respawnPoint; 
     private float respawnDelay = 5f;
 
     [Header("Camera Settings")]
-    public CinemachineCamera playerCamera; // Assign the correct Cinemachine virtual camera in the Inspector
+    public CinemachineCamera playerCamera; 
 
     private GameObject[] allCameras;
 
@@ -33,7 +36,7 @@ public class PlayerStats : MonoBehaviour
     {
         currentHealth = playerMaxHealth;
         UpdateHealthUI();
-        allCameras = GameObject.FindGameObjectsWithTag("Camera"); // Cache cameras for performance
+        allCameras = GameObject.FindGameObjectsWithTag("Camera");
     }
 
     public void TakeDamage(int damage)
@@ -46,7 +49,7 @@ public class PlayerStats : MonoBehaviour
         if (currentHealth > 0)
         {
             StartIFrames();
-            if (regenCoroutine != null) StopCoroutine(regenCoroutine); // Stop regen if taking damage
+            if (regenCoroutine != null) StopCoroutine(regenCoroutine); 
             regenCoroutine = StartCoroutine(StartHealthRegen());
         }
         else
@@ -68,19 +71,19 @@ public class PlayerStats : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Player has died!!!!");
-        deathUI.SetActive(true); // Show death UI
+        deathUI.SetActive(true); 
         Invoke(nameof(Respawn), respawnDelay);
     }
 
     private void Respawn()
     {
-        transform.position = respawnPoint.position; // Move player to respawn point
-        currentHealth = playerMaxHealth; // Restore health
+        AudioManager.instance.PlaySound(deathSound);
+        transform.position = respawnPoint.position; 
+        currentHealth = playerMaxHealth; 
         UpdateHealthUI();
-        deathUI.SetActive(false); // Hide death UI
+        deathUI.SetActive(false); 
         SwitchToPlayerCamera();
-        if (regenCoroutine != null) StopCoroutine(regenCoroutine); // Reset regen on respawn
+        if (regenCoroutine != null) StopCoroutine(regenCoroutine); 
         regenCoroutine = StartCoroutine(StartHealthRegen());
     }
 
@@ -93,7 +96,7 @@ public class PlayerStats : MonoBehaviour
         if (playerCamera != null)
         {
             playerCamera.gameObject.SetActive(true);
-            playerCamera.Priority = 10; // Ensure player's camera has the highest priority
+            playerCamera.Priority = 10; 
         }
     }
 

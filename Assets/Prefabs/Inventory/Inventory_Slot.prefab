@@ -114,5 +114,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 8258832008363689857}
+  inventorySelectSound: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
   selectedColour: {r: 1, g: 0.61866444, b: 0.5518868, a: 1}
   notSelectedColour: {r: 1, g: 1, b: 1, a: 1}

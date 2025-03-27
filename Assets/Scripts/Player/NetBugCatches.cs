@@ -4,16 +4,19 @@ using System.Collections;
 public class NetBugCatcher : MonoBehaviour
 {
     [Header("Net Settings")]
-    public Vector2 boxSize = new Vector2(3f, 3f);
+    [SerializeField] private Vector2 boxSize = new Vector2(3f, 3f);
 
     [Header("Capture Settings")]
-    public LayerMask captureLayer;
-    public Transform player;
+    [SerializeField] private LayerMask captureLayer;
+    [SerializeField] private Transform player;
+    [SerializeField] private AudioSource captureSound;
+    [SerializeField] private AudioClip captureSound1;
+    [SerializeField] private AudioClip captureSound2;
 
     [Header("Placement Settings")]
-    public float initialDropCooldown = 0.5f;  // Start delay between drops
-    public float minDropCooldown = 0.1f;      // Minimum drop speed
-    public float dropAcceleration = 0.05f;    // How much the cooldown decreases per drop
+    [SerializeField] private float initialDropCooldown = 0.5f;
+    [SerializeField] private float minDropCooldown = 0.1f;
+    [SerializeField] private float dropAcceleration = 0.05f;
 
     private float currentDropCooldown;
     private bool isPlacing;
@@ -21,8 +24,11 @@ public class NetBugCatcher : MonoBehaviour
 
     private void Start()
     {
-        if (player == null) player = GameObject.FindWithTag("Player").transform;
-        tutorialPopup = FindObjectOfType<TutorialPopup>();
+        if (player == null)
+        {
+            player = GameObject.FindWithTag("Player").transform;
+        }
+        tutorialPopup = FindFirstObjectByType<TutorialPopup>();
         currentDropCooldown = initialDropCooldown;
     }
 
@@ -71,19 +77,32 @@ public class NetBugCatcher : MonoBehaviour
         {
             item = bugComp.bugItem;
             tutorialPopup?.CompleteStep("CatchBug");
+            PlayRandomCaptureSound();
         }
         else if (collider.TryGetComponent(out Food foodComp) && foodComp.foodItem != null)
         {
             item = foodComp.foodItem;
             tutorialPopup?.CompleteStep("CatchFood");
+            PlayRandomCaptureSound();
         }
         else if (collider.TryGetComponent(out EggItem eggComp) && eggComp.eggItem != null)
         {
             item = eggComp.eggItem;
             tutorialPopup?.CompleteStep("CatchEgg");
+            PlayRandomCaptureSound();
         }
 
         return (item != null && InventoryManager.instance.AddItem(item)) ? item : null;
+    }
+
+    private void PlayRandomCaptureSound()
+    {
+        if (captureSound == null) return;
+
+        // Randomly choose between two sounds
+        AudioClip soundToPlay = Random.Range(0f, 1f) > 0.5f ? captureSound1 : captureSound2;
+        float volume = 0.5f;
+        captureSound.PlayOneShot(soundToPlay, volume);
     }
 
     private IEnumerator PlaceItemRoutine()

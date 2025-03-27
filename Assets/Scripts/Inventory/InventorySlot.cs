@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
  public Image image;
- public Color selectedColour, notSelectedColour;
-    private Vector3 originalScale;
-    private Vector3 selectedScale;
+    [SerializeField] private AudioClip inventorySelectSound;
+    public Color selectedColour, notSelectedColour;
+    private Vector3 originalScale, selectedScale;
 
 
     private void Awake()
@@ -20,7 +20,8 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     public void Select()
     {
         image.color = selectedColour;
-        transform.localScale = selectedScale; 
+        transform.localScale = selectedScale;
+        AudioManager.instance.PlaySound(inventorySelectSound);
     }
 
     public void Deselect()
