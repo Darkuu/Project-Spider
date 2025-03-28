@@ -9,6 +9,8 @@ public class NetBugCatcher : MonoBehaviour
     [Header("Capture Settings")]
     [SerializeField] private LayerMask captureLayer;
     [SerializeField] private Transform player;
+
+    [Header("Audio Settings")]
     [SerializeField] private AudioSource captureSound;
     [SerializeField] private AudioClip captureSound1;
     [SerializeField] private AudioClip captureSound2;
@@ -77,33 +79,24 @@ public class NetBugCatcher : MonoBehaviour
         {
             item = bugComp.bugItem;
             tutorialPopup?.CompleteStep("CatchBug");
-            PlayRandomCaptureSound();
+            PlayRandomSound();
         }
         else if (collider.TryGetComponent(out Food foodComp) && foodComp.foodItem != null)
         {
             item = foodComp.foodItem;
             tutorialPopup?.CompleteStep("CatchFood");
-            PlayRandomCaptureSound();
+            PlayRandomSound();
         }
         else if (collider.TryGetComponent(out EggItem eggComp) && eggComp.eggItem != null)
         {
             item = eggComp.eggItem;
             tutorialPopup?.CompleteStep("CatchEgg");
-            PlayRandomCaptureSound();
+            PlayRandomSound();
         }
 
         return (item != null && InventoryManager.instance.AddItem(item)) ? item : null;
     }
 
-    private void PlayRandomCaptureSound()
-    {
-        if (captureSound == null) return;
-
-        // Randomly choose between two sounds
-        AudioClip soundToPlay = Random.Range(0f, 1f) > 0.5f ? captureSound1 : captureSound2;
-        float volume = 0.5f;
-        captureSound.PlayOneShot(soundToPlay, volume);
-    }
 
     private IEnumerator PlaceItemRoutine()
     {
@@ -130,11 +123,23 @@ public class NetBugCatcher : MonoBehaviour
             Vector2 spawnPosition = (Vector2)transform.position;
             if (selectedItem.type == ItemType.Bug || selectedItem.type == ItemType.Food || selectedItem.type == ItemType.Egg)
             {
+                PlayRandomSound();
                 InventoryManager.instance.GetSelectedItem(true);
                 selectedItem.Use(spawnPosition);
+
             }
         }
     }
+    private void PlayRandomSound()
+    {
+        if (captureSound == null) return;
+
+        // Randomly choose between two sounds
+        AudioClip soundToPlay = Random.Range(0f, 1f) > 0.5f ? captureSound1 : captureSound2;
+        float volume = 0.5f;
+        captureSound.PlayOneShot(soundToPlay, volume);
+    }
+
 
     private void RotateAroundPlayer()
     {

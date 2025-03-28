@@ -11,11 +11,26 @@ public class SellBox : MonoBehaviour
     [SerializeField] private float resetTime = 5f;
     private Coroutine resetCoroutine;
 
+
+
+        private TutorialPopup tutorialPopup;
+
+    private void Start()
+    {
+       {
+            tutorialPopup = FindFirstObjectByType<TutorialPopup>(); 
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         EggItem egg = other.GetComponent<EggItem>();
         if (egg != null && egg.eggItem != null)
         {
+            if (tutorialPopup != null)
+            {
+                tutorialPopup.CompleteStep("SellEgg");
+            }
             int value = egg.eggItem.sellValue;
             MoneyManager.instance.AddCoins(value);
             Debug.Log("Egg sold for " + value + " coins!");
