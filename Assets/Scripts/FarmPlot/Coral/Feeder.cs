@@ -18,7 +18,7 @@ public class Feeder : MonoBehaviour
     public TMP_Text foodCountText;
 
     [Header("Food Layer Settings")]
-    public LayerMask foodLayer; // Assign this in the inspector to be the "Food" layer
+    public LayerMask foodLayer; 
 
     private List<GameObject> storedFood = new List<GameObject>();
     private int foodCount = 0;
@@ -34,10 +34,8 @@ public class Feeder : MonoBehaviour
     {
         if (foodCount >= maxFoodCapacity) return;
 
-        // Check if the object belongs to the "Food" layer
         if (IsInFoodLayer(other))
         {
-            // Lock onto food tag if not set
             if (foodTag == null)
             {
                 foodTag = other.tag;
@@ -54,13 +52,11 @@ public class Feeder : MonoBehaviour
         }
     }
 
-    // Helper method to check if an object is in the "Food" layer
     private bool IsInFoodLayer(Collider2D other)
     {
         return ((foodLayer.value & (1 << other.gameObject.layer)) > 0);
     }
 
-    // Feed food from storage at regular intervals
     private IEnumerator FeedRoutine()
     {
         while (true)
@@ -75,7 +71,6 @@ public class Feeder : MonoBehaviour
                 UpdateFoodCountUI();
             }
 
-            // Reset foodTag when storage is empty
             if (storedFood.Count == 0)
             {
                 foodTag = null;
@@ -88,10 +83,9 @@ public class Feeder : MonoBehaviour
     // Update food count UI
     private void UpdateFoodCountUI()
     {
-        string foodTagDisplay = foodTag != null ? foodTag : "Any";
         if (foodCountText != null)
         {
-            foodCountText.text = $"Food: {foodCount}/{maxFoodCapacity} ({foodTagDisplay})";
+            foodCountText.text = $"{foodCount}/{maxFoodCapacity})";
         }
     }
 }

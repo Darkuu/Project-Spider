@@ -17,7 +17,6 @@ public class EggCollector : MonoBehaviour
     [Header("Egg Drop Settings")]
     public Transform dropPoint;           
 
-    // Instead of a Transform, we use a preset coordinate for storage:
     [Header("Egg Storage Settings")]
     public Vector3 storagePoint = new Vector3(10, 50, 0);
 
@@ -98,10 +97,9 @@ public class EggCollector : MonoBehaviour
 
     private void UpdateEggCountDisplay()
     {
-        string eggTypeDisplay = eggType != null ? eggType : "Any";
         if (eggCountText != null)
         {
-            eggCountText.text = $"{eggCount}/{maxCapacity} ({eggTypeDisplay})";
+            eggCountText.text = $"{eggCount}/{maxCapacity}";
         }
     }
 

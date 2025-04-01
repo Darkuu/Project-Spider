@@ -566,6 +566,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopUI: {fileID: 3452305960377767277}
   openKey: 101
+  closeKey: 27
   spawnPoint: {fileID: 0}
   interactionPrompt: {fileID: 40279621019595348}
 --- !u!61 &4007638223946412116
@@ -606,7 +607,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.9, y: 2.02}
+    oldSize: {x: 3.8, y: 4.04}
     newSize: {x: 8.4, y: 4.26}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -889,7 +890,7 @@ Transform:
   m_GameObject: {fileID: 2204434061299226295}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: -2.66, z: 0}
+  m_LocalPosition: {x: -1.66, y: 1.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2208,7 +2209,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 4.9, y: -4.08, z: 0}
-  m_LocalScale: {x: 0.5183, y: 0.5183, z: 0.5183}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 536117084262846993}
@@ -2257,12 +2258,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 347232466687201579, guid: 8a596ab09d615eb43a6e99eab77d59b7, type: 3}
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.3733332, y: 2.0333333}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -2420,7 +2421,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7485616247853878784
 Transform:
   m_ObjectHideFlags: 0

@@ -11,18 +11,31 @@ public class EggIncubator : MonoBehaviour
         public float incubationTime; 
     }
 
+
     public EggType[] eggTypes; 
     public LayerMask eggLayer; 
     public TMP_Text timerText;  
 
     private bool isIncubating = false; 
     private float timeRemaining; 
-    private EggItem currentEggItem; 
+    private EggItem currentEggItem;
 
+    private TutorialPopup tutorialPopup;
+
+    private void Start()
+    {
+        {
+            tutorialPopup = FindFirstObjectByType<TutorialPopup>();
+        }
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (IsEggLayer(other.gameObject))
         {
+            if (tutorialPopup != null)
+            {
+                tutorialPopup.CompleteStep("incubateBug");
+            }
             EggItem eggItem = other.GetComponent<EggItem>();
             if (eggItem != null && !isIncubating)
             {
