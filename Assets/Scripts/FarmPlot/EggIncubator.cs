@@ -65,7 +65,7 @@ public class EggIncubator : MonoBehaviour
         while (timeRemaining > 0)
         {
             timeRemaining -= Time.deltaTime;
-            timerText.text = $"Time Remaining: {Mathf.Round(timeRemaining)}s";
+            timerText.text = $"{Mathf.Round(timeRemaining)}s";
 
             yield return null;
         }

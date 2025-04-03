@@ -37,9 +37,10 @@ public class Bug : MonoBehaviour
             PlayerStats playerHealth = other.gameObject.GetComponent<PlayerStats>();
             if (playerHealth != null)
             {
-                playerHealth.TakeDamage(damage);
+                playerHealth.TakeDamage(damage, transform.position); 
             }
         }
+
     }
 
     void DropPoop()
@@ -47,7 +48,6 @@ public class Bug : MonoBehaviour
         Instantiate(poopPrefab, transform.position, Quaternion.identity);
     }
 
-    // Update is called once per frame
 
     private void Start()
     {

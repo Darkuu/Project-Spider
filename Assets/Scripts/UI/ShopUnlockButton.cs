@@ -6,10 +6,13 @@ public class ShopUnlockButton : MonoBehaviour
 {
     [Header("Unlock Settings")]
     public int price = 10;
-    public GameObject[] objectsToDelete; // Objects to remove
-    public GameObject objectToModify; // Object whose visuals will change
-    public Sprite newSprite; // New sprite for visual change
+    public GameObject[] objectsToDelete; 
+    public GameObject objectToModify; 
+    public Sprite newSprite; 
     public bool disableAfterPurchase = true;
+
+    [Header("Activation Settings")]
+    public GameObject[] objectsToActivate; 
 
     [Header("UI Display")]
     public TMP_Text priceText;
@@ -28,6 +31,7 @@ public class ShopUnlockButton : MonoBehaviour
             return;
         }
 
+        // Delete objects
         if (objectsToDelete != null)
         {
             foreach (GameObject obj in objectsToDelete)
@@ -37,12 +41,23 @@ public class ShopUnlockButton : MonoBehaviour
             }
         }
 
+        // Modify object sprite
         if (objectToModify != null && newSprite != null)
         {
             SpriteRenderer spriteRenderer = objectToModify.GetComponent<SpriteRenderer>();
             if (spriteRenderer != null)
             {
                 spriteRenderer.sprite = newSprite;
+            }
+        }
+
+        // Activate objects
+        if (objectsToActivate != null)
+        {
+            foreach (GameObject obj in objectsToActivate)
+            {
+                if (obj != null)
+                    obj.SetActive(true);
             }
         }
 

@@ -3,7 +3,6 @@ using TMPro; // Import TextMeshPro
 using UnityEngine.UI; // Import UI elements
 using Unity.Cinemachine; // Import Cinemachine
 using System.Collections;
-using UnityEditor.Build.Content;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -16,7 +15,7 @@ public class PlayerStats : MonoBehaviour
     private bool isInvincible = false;
 
     private float regenCooldown = 20f;
-    private float regenRate = 5f; 
+    private float regenRate = 5f;
     private Coroutine regenCoroutine;
 
     [Header("Death Elements")]
@@ -24,11 +23,14 @@ public class PlayerStats : MonoBehaviour
     public AudioClip deathSound;
 
     [Header("Respawn Settings")]
-    public Transform respawnPoint; 
+    public Transform respawnPoint;
     private float respawnDelay = 5f;
 
     [Header("Camera Settings")]
-    public CinemachineCamera playerCamera; 
+    public CinemachineCamera playerCamera;
+
+    [Header("Knockback Settings")]
+    public PlayerMovement playerMovement; // Reference to PlayerMovement script
 
     private GameObject[] allCameras;
 
@@ -39,17 +41,23 @@ public class PlayerStats : MonoBehaviour
         allCameras = GameObject.FindGameObjectsWithTag("Camera");
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector2 damageSource)
     {
         if (isInvincible) return;
 
         currentHealth -= damage;
         UpdateHealthUI();
 
+        // Trigger knockback when taking damage
+        if (playerMovement != null)
+        {
+            playerMovement.ApplyKnockback(damageSource); // Call ApplyKnockback from PlayerMovement
+        }
+
         if (currentHealth > 0)
         {
             StartIFrames();
-            if (regenCoroutine != null) StopCoroutine(regenCoroutine); 
+            if (regenCoroutine != null) StopCoroutine(regenCoroutine);
             regenCoroutine = StartCoroutine(StartHealthRegen());
         }
         else
@@ -71,19 +79,19 @@ public class PlayerStats : MonoBehaviour
 
     private void Die()
     {
-        deathUI.SetActive(true); 
+        deathUI.SetActive(true);
         Invoke(nameof(Respawn), respawnDelay);
     }
 
     private void Respawn()
     {
         AudioManager.instance.PlaySound(deathSound);
-        transform.position = respawnPoint.position; 
-        currentHealth = playerMaxHealth; 
+        transform.position = respawnPoint.position;
+        currentHealth = playerMaxHealth;
         UpdateHealthUI();
-        deathUI.SetActive(false); 
+        deathUI.SetActive(false);
         SwitchToPlayerCamera();
-        if (regenCoroutine != null) StopCoroutine(regenCoroutine); 
+        if (regenCoroutine != null) StopCoroutine(regenCoroutine);
         regenCoroutine = StartCoroutine(StartHealthRegen());
     }
 
@@ -96,7 +104,7 @@ public class PlayerStats : MonoBehaviour
         if (playerCamera != null)
         {
             playerCamera.gameObject.SetActive(true);
-            playerCamera.Priority = 10; 
+            playerCamera.Priority = 10;
         }
     }
 
