@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,6 +16,10 @@ public class TutorialPopup : MonoBehaviour
         public string actionToComplete;
         public GameObject triggerZone;
         public bool autoTriggerNextStep;
+
+        [Header("Auto Complete")]
+        public bool autoCompleteStep = false;
+        public float autoCompleteDelay = 3f; // seconds
     }
 
     [Header("Tutorial Steps")]
@@ -29,21 +33,24 @@ public class TutorialPopup : MonoBehaviour
     public AudioSource notificationSound;
     public AudioSource tutorialStepCompleteSound;
 
-    public float stepDelay = 2f; 
+    public float stepDelay = 2f;
 
     private int currentStep = -1;
     private bool isTutorialActive = false;
+
+    private HashSet<string> completedActions = new HashSet<string>();
 
     private void Start()
     {
         popupUI.SetActive(false);
 
-        foreach (var step in tutorialSteps)
+        for (int i = 0; i < tutorialSteps.Count; i++)
         {
+            var step = tutorialSteps[i];
             if (step.triggerZone != null)
             {
                 step.triggerZone.SetActive(true);
-                step.triggerZone.AddComponent<TutorialStepTrigger>().Setup(this, tutorialSteps.IndexOf(step));
+                step.triggerZone.AddComponent<TutorialStepTrigger>().Setup(this, i);
             }
         }
 
@@ -60,13 +67,21 @@ public class TutorialPopup : MonoBehaviour
 
     public void ShowTutorialStep(int stepIndex)
     {
+        // Skip already completed steps
+        while (stepIndex < tutorialSteps.Count && completedActions.Contains(tutorialSteps[stepIndex].actionToComplete))
+        {
+            stepIndex++;
+        }
+
         if (stepIndex >= tutorialSteps.Count) return;
 
         currentStep = stepIndex;
-        TutorialStep step = tutorialSteps[stepIndex];
+        var step = tutorialSteps[stepIndex];
 
         if (step.triggerZone != null)
+        {
             step.triggerZone.SetActive(false);
+        }
 
         popupUI.SetActive(true);
         titleText.text = step.title;
@@ -84,39 +99,53 @@ public class TutorialPopup : MonoBehaviour
         }
 
         isTutorialActive = true;
+
+        // ✅ NEW: Start auto-complete if enabled
+        if (step.autoCompleteStep)
+        {
+            StartCoroutine(AutoCompleteStepAfterDelay(step.actionToComplete, step.autoCompleteDelay));
+        }
     }
 
     public void CompleteStep(string action)
     {
-        if (!isTutorialActive || currentStep == -1) return;
+        if (completedActions.Contains(action)) return;
 
-        if (tutorialSteps[currentStep].actionToComplete == action)
+        completedActions.Add(action);
+
+        // If this is the current step, mark as complete and optionally move to next
+        if (isTutorialActive && currentStep != -1 && tutorialSteps[currentStep].actionToComplete == action)
         {
             tutorialStepCompleteSound.Play();
             popupUI.SetActive(false);
             isTutorialActive = false;
 
             int nextStep = currentStep + 1;
-            if (nextStep < tutorialSteps.Count)
+
+            if (nextStep < tutorialSteps.Count && tutorialSteps[nextStep].autoTriggerNextStep)
             {
-                if (tutorialSteps[nextStep].autoTriggerNextStep)
-                {
-                    Invoke(nameof(TriggerNextStep), stepDelay); 
-                }
+                Invoke(nameof(TriggerNextStep), stepDelay);
             }
         }
     }
 
     public void TriggerNextStep()
     {
-        int nextStep = currentStep + 1;
-        if (nextStep < tutorialSteps.Count)
+        ShowTutorialStep(currentStep + 1);
+    }
+
+    private IEnumerator AutoCompleteStepAfterDelay(string action, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (isTutorialActive && tutorialSteps[currentStep].actionToComplete == action)
         {
-            ShowTutorialStep(nextStep);
+            CompleteStep(action);
         }
     }
 }
 
+// ✅ Still bundled for simplicity
 class TutorialStepTrigger : MonoBehaviour
 {
     private TutorialPopup tutorialPopup;

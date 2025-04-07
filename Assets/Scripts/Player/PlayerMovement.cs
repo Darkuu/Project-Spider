@@ -9,13 +9,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float baseSpeed = 8f;
     [SerializeField] private float sprintMultiplier = 1.5f;
     [SerializeField] private float knockbackForce = 5f;
-    [SerializeField] private float knockbackDuration = 0.2f; 
+    [SerializeField] private float knockbackDuration = 0.2f;
 
     [SerializeField] private Rigidbody2D rb;
 
     private TutorialPopup tutorialPopup;
-    private bool isKnockedBack = false; 
+    private bool isKnockedBack = false;
     private Vector2 knockbackDirection;
+    private bool hasMoved = false;
 
     private void Start()
     {
@@ -26,9 +27,15 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isKnockedBack) return;
 
-        
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
+
+        // Check for first movement input
+        if (!hasMoved && (horizontal != 0 || vertical != 0))
+        {
+            hasMoved = true;
+            tutorialPopup?.CompleteStep("playerMove"); 
+        }
     }
 
     private void FixedUpdate()
@@ -65,9 +72,9 @@ public class PlayerMovement : MonoBehaviour
 
     private IEnumerator GradualKnockbackReduction()
     {
-        float initialForce = knockbackForce;  
-        float elapsedTime = 0f;  
-        float knockbackDuration = 0.5f;  
+        float initialForce = knockbackForce;
+        float elapsedTime = 0f;
+        float knockbackDuration = 0.5f;
 
         while (elapsedTime < knockbackDuration)
         {
@@ -81,10 +88,9 @@ public class PlayerMovement : MonoBehaviour
         isKnockedBack = false;
     }
 
-
     private IEnumerator ResetMovementAfterKnockback()
     {
         yield return new WaitForSeconds(knockbackDuration);
-        isKnockedBack = false; 
+        isKnockedBack = false;
     }
 }
