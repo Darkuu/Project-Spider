@@ -133,7 +133,7 @@ public class PlayerStats : MonoBehaviour
     {
         if (healthText != null)
         {
-            healthText.text = $"Health: {Mathf.RoundToInt(currentHealth)}/{Mathf.RoundToInt(playerMaxHealth)}";
+            healthText.text = $"{Mathf.RoundToInt(currentHealth)}/{Mathf.RoundToInt(playerMaxHealth)}";
         }
     }
 }

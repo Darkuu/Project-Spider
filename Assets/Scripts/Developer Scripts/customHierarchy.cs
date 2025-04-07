@@ -30,28 +30,34 @@ public class CustomHierarchyColor : MonoBehaviour
 
             if (objName.Contains("background"))
             {
-                backgroundColor = new Color(0.2f, 0.6f, 0.1f); // Light green for background
-                textColor = new Color(0.9f, 0.9f, 0.9f); // White text
+                backgroundColor = new Color(0.2f, 0.6f, 0.1f); 
+                textColor = new Color(0.9f, 0.9f, 0.9f); 
             }
-            else if (objName.Contains("canvas"))
+            /* else if (objName.Contains("canvas"))
             {
-                backgroundColor = new Color(0.7f, 0.45f, 0.0f); // Orange for canvas
-                textColor = new Color(0.9f, 0.9f, 0.9f); // White text
+                backgroundColor = new Color(0.7f, 0.45f, 0.0f); 
+                textColor = new Color(0.9f, 0.9f, 0.9f); 
             }
-            else if (objName.Contains("ui"))
+            */
+            else if (objName.Contains("user interface"))
             {
-                backgroundColor = new Color(0.4f, 0.2f, 0.8f); // Purple for UI elements
-                textColor = new Color(0.9f, 0.9f, 0.9f); // White text
+                backgroundColor = new Color(0.4f, 0.2f, 0.8f); 
+                textColor = new Color(0.9f, 0.9f, 0.9f); 
             }
             else if (objName.Contains("character"))
             {
-                backgroundColor = new Color(0.01176f, 0.6745f, 0.7882f); // Blue for UI elements
-                textColor = new Color(0.9f, 0.9f, 0.9f); // White text
+                backgroundColor = new Color(0.01176f, 0.6745f, 0.7882f); 
+                textColor = new Color(0.9f, 0.9f, 0.9f); 
             }
             else if (objName.Contains("[ph]"))
             {
-                backgroundColor = new Color(1f, 0f, 0f); // Blue for UI elements
-                textColor = new Color(0.9f, 0.9f, 0.9f); // White text
+                backgroundColor = new Color(1f, 0f, 0f); 
+                textColor = new Color(0.9f, 0.9f, 0.9f); 
+            }
+            else if (objName.Contains("systems"))
+            {
+                backgroundColor = new Color(1f, 0f, 1f); 
+                textColor = new Color(0.9f, 0.9f, 0.9f); 
             }
 
             // If we have a color, draw it
