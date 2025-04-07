@@ -5,18 +5,18 @@ using Unity.Cinemachine;
 public class Teleporter : MonoBehaviour
 {
     [Header("Teleport Destination Colliders")]
-    public Collider2D firstAreaCollider;   // Collider defining the first area's destination
-    public Collider2D secondAreaCollider;  // Collider defining the second area's destination
+    public Collider2D firstAreaCollider;
+    public Collider2D secondAreaCollider;
 
-    [Header("Camera Settings")]
-    public CinemachineCamera firstCamera;     // Camera for the first area
-    public PolygonCollider2D firstCameraBounds;  // Bounds for confining the first camera
-    public CinemachineCamera secondCamera;    // Camera for the second area
-    public PolygonCollider2D secondCameraBounds; // Bounds for confining the second camera
+    [Header("Camera & Confiner")]
+    public CinemachineCamera mainCamera;
+    public CinemachineConfiner2D cameraConfiner;
+    public PolygonCollider2D firstCameraBounds;
+    public PolygonCollider2D secondCameraBounds;
 
-    private bool isInFirstArea = true; // Tracks if the player is currently in the first area
+    private bool isInFirstArea = true;
     private bool isTeleporting = false;
-    private bool isInTeleporterArea = false; // Prevents multiple triggers
+    private bool isInTeleporterArea = false;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -42,25 +42,21 @@ public class Teleporter : MonoBehaviour
         // Fade to black before teleporting
         yield return StartCoroutine(ScreenFader.instance.FadeToBlack());
 
-        // Teleport the player to the center of the destination collider
         if (isInFirstArea)
         {
             if (secondAreaCollider != null)
-            {
                 player.position = secondAreaCollider.bounds.center;
-            }
-            SwitchToSecondCamera();
+
+            SetCameraBounds(secondCameraBounds);
         }
         else
         {
             if (firstAreaCollider != null)
-            {
                 player.position = firstAreaCollider.bounds.center;
-            }
-            SwitchToFirstCamera();
+
+            SetCameraBounds(firstCameraBounds);
         }
 
-        // Toggle current area flag
         isInFirstArea = !isInFirstArea;
 
         // Fade from black after teleporting
@@ -69,37 +65,16 @@ public class Teleporter : MonoBehaviour
         isTeleporting = false;
     }
 
-    private void SwitchToFirstCamera()
+    private void SetCameraBounds(PolygonCollider2D newBounds)
     {
-        if (secondCamera != null)
-            secondCamera.gameObject.SetActive(false);
-
-        if (firstCamera != null)
+        if (cameraConfiner != null && newBounds != null)
         {
-            firstCamera.gameObject.SetActive(true);
-            CinemachineConfiner2D confiner = firstCamera.GetComponent<CinemachineConfiner2D>();
-            if (confiner != null && firstCameraBounds != null)
-            {
-                confiner.BoundingShape2D = firstCameraBounds;
-                confiner.InvalidateBoundingShapeCache();
-            }
-        }
-    }
+            cameraConfiner.BoundingShape2D = newBounds;
 
-    private void SwitchToSecondCamera()
-    {
-        if (firstCamera != null)
-            firstCamera.gameObject.SetActive(false);
-
-        if (secondCamera != null)
-        {
-            secondCamera.gameObject.SetActive(true);
-            CinemachineConfiner2D confiner = secondCamera.GetComponent<CinemachineConfiner2D>();
-            if (confiner != null && secondCameraBounds != null)
-            {
-                confiner.BoundingShape2D = secondCameraBounds;
-                confiner.InvalidateBoundingShapeCache();
-            }
+            // Force refresh (Cinemachine 3.x)
+            cameraConfiner.enabled = false;
+            cameraConfiner.enabled = true;
+            mainCamera.ForceCameraPosition(mainCamera.Follow.position, Quaternion.identity);
         }
     }
 }
