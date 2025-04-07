@@ -11,7 +11,6 @@ public class NetBugCatcher : MonoBehaviour
     [SerializeField] private Transform player;
 
     [Header("Audio Settings")]
-    [SerializeField] private AudioSource captureSound;
     [SerializeField] private AudioClip captureSound1;
     [SerializeField] private AudioClip captureSound2;
 
@@ -49,7 +48,7 @@ public class NetBugCatcher : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             isPlacing = false;
-            currentDropCooldown = initialDropCooldown; // Reset cooldown when button is released
+            currentDropCooldown = initialDropCooldown; 
         }
     }
 
@@ -97,7 +96,6 @@ public class NetBugCatcher : MonoBehaviour
         return (item != null && InventoryManager.instance.AddItem(item)) ? item : null;
     }
 
-
     private IEnumerator PlaceItemRoutine()
     {
         isPlacing = true;
@@ -126,20 +124,20 @@ public class NetBugCatcher : MonoBehaviour
                 PlayRandomSound();
                 InventoryManager.instance.GetSelectedItem(true);
                 selectedItem.Use(spawnPosition);
-
             }
         }
     }
+
     private void PlayRandomSound()
     {
-        if (captureSound == null) return;
+        if (captureSound1 == null || captureSound2 == null) return;
 
         // Randomly choose between two sounds
         AudioClip soundToPlay = Random.Range(0f, 1f) > 0.5f ? captureSound1 : captureSound2;
         float volume = 0.5f;
-        captureSound.PlayOneShot(soundToPlay, volume);
-    }
 
+        AudioManager.instance.PlaySFX(soundToPlay); 
+    }
 
     private void RotateAroundPlayer()
     {

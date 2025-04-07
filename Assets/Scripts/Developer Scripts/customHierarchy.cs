@@ -26,7 +26,7 @@ public class CustomHierarchyColor : MonoBehaviour
             Texture2D texture = null;
 
             // Define conditions to color based on the name containing certain keywords
-            string objName = obj.name.ToLower();  // Convert name to lowercase for case-insensitive comparison
+            string objName = obj.name.ToLower(); 
 
             if (objName.Contains("background"))
             {

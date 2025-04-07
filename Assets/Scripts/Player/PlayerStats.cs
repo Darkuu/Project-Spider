@@ -85,7 +85,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Respawn()
     {
-        AudioManager.instance.PlaySound(deathSound);
+        AudioManager.instance.PlaySFX(deathSound);
         transform.position = respawnPoint.position;
         currentHealth = playerMaxHealth;
         UpdateHealthUI();

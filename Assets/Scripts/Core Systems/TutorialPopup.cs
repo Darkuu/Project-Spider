@@ -30,8 +30,8 @@ public class TutorialPopup : MonoBehaviour
     public TMP_Text titleText;
     public TMP_Text descriptionText;
     public Image iconImage;
-    public AudioSource notificationSound;
-    public AudioSource tutorialStepCompleteSound;
+    public AudioClip notificationSound;
+    public AudioClip tutorialStepCompleteSound;
 
     public float stepDelay = 2f;
 
@@ -86,7 +86,7 @@ public class TutorialPopup : MonoBehaviour
         popupUI.SetActive(true);
         titleText.text = step.title;
         descriptionText.text = step.description;
-        notificationSound.Play();
+        AudioManager.instance.PlaySFX(notificationSound);
 
         if (step.icon != null)
         {
@@ -116,7 +116,7 @@ public class TutorialPopup : MonoBehaviour
         // If this is the current step, mark as complete and optionally move to next
         if (isTutorialActive && currentStep != -1 && tutorialSteps[currentStep].actionToComplete == action)
         {
-            tutorialStepCompleteSound.Play();
+            AudioManager.instance.PlaySFX(tutorialStepCompleteSound);
             popupUI.SetActive(false);
             isTutorialActive = false;
 
