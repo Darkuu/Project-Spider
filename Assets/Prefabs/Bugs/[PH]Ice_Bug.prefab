@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 1110323241005363913}
   - component: {fileID: 7957741407856791383}
   - component: {fileID: 5751895534172688330}
+  - component: {fileID: 7974267153352400094}
   - component: {fileID: 7017893272054360563}
-  - component: {fileID: 8780002434785722332}
   m_Layer: 7
   m_Name: '[PH]Ice_Bug'
   m_TagString: Bug
@@ -157,7 +157,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10.71875, y: 18.59375}
+    oldSize: {x: 1.1433333, y: 1.9833333}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -178,10 +178,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bugItem: {fileID: 11400000, guid: 9efc8b27b4b1b804b95e29643847e520, type: 2}
-  allowedFoodTag: Food
+  allowedFoodTag: Food_IceBug
   poopPrefab: {fileID: 4023120096391451991, guid: ce0c5bacc041d4b4ab788810f587ea36, type: 3}
+  cooldownTime: 30
   damage: 2
   isHostile: 1
+--- !u!114 &7974267153352400094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5392620315565645491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69692fce6cceba54ba57e91d66cd0894, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 2
+  chaseSpeed: 3.5
+  foodDetectionRadius: 5
+  foodTag: Food
+  changeDirectionTime: 2
+  waitTime: 10
+  hungerThreshold: 0.2
+  currentHunger: 1
+  isHostile: 1
+  allowedFoodTag: Food
+  poopPrefab: {fileID: 0}
 --- !u!58 &7017893272054360563
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -218,19 +242,3 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 5
---- !u!114 &8780002434785722332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5392620315565645491}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fe2f888330edc447a04a00dfd528193, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 2
-  chaseSpeed: 3.5
-  changeDirectionTime: 2
-  waitTime: 10

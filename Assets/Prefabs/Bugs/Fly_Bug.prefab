@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1640879570357418641}
   - component: {fileID: 7023718015586040179}
   - component: {fileID: 6008233627096313257}
-  - component: {fileID: -6591322468981872985}
+  - component: {fileID: 6893441933751500283}
   - component: {fileID: 5135321245430221108}
   m_Layer: 7
   m_Name: Fly_Bug
@@ -180,9 +180,10 @@ MonoBehaviour:
   bugItem: {fileID: 11400000, guid: 5ae7e2983be4f9a49842298e02d10c02, type: 2}
   allowedFoodTag: Food_FlyBug
   poopPrefab: {fileID: 4023120096391451991, guid: 14e9c1472de814746b41eeaab5acb6a0, type: 3}
+  cooldownTime: 30
   damage: 0
   isHostile: 0
---- !u!114 &-6591322468981872985
+--- !u!114 &6893441933751500283
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,14 +192,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3654616740452175578}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 905bf5eee687394469b441062a2042ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 69692fce6cceba54ba57e91d66cd0894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  minChangeDirectionTime: 1
-  maxChangeDirectionTime: 3
-  minWaitTime: 0.5
-  maxWaitTime: 2
+  chaseSpeed: 3.5
+  foodDetectionRadius: 5
+  foodTag: Food_FlyBug
+  changeDirectionTime: 2
+  waitTime: 1
+  hungerThreshold: 0.2
+  currentHunger: 1
 --- !u!58 &5135321245430221108
 CircleCollider2D:
   m_ObjectHideFlags: 0

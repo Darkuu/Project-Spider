@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1640879570357418641}
   - component: {fileID: 7023718015586040179}
   - component: {fileID: 6008233627096313257}
-  - component: {fileID: -6591322468981872985}
+  - component: {fileID: 589041007590235015}
   - component: {fileID: 4610756560969618028}
   m_Layer: 7
   m_Name: Normal_Bug_World
@@ -178,11 +178,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bugItem: {fileID: 11400000, guid: 5a7d0b16de83654459a16b452052c29b, type: 2}
-  eatingCooldown: 5
-  foodRange: {fileID: 4610756560969618028}
   allowedFoodTag: Food
   poopPrefab: {fileID: 4023120096391451991, guid: 97705acdb01c7f54c93f5fcd0316b227, type: 3}
---- !u!114 &-6591322468981872985
+  cooldownTime: 30
+  damage: 0
+  isHostile: 0
+--- !u!114 &589041007590235015
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -191,12 +192,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 3654616740452175578}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 905bf5eee687394469b441062a2042ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 69692fce6cceba54ba57e91d66cd0894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  changeDirectionTime: 1
-  waitTime: 2
+  chaseSpeed: 2
+  foodDetectionRadius: 3
+  foodTag: Food
+  changeDirectionTime: 3
+  waitTime: 1
+  hungerThreshold: 0.2
+  currentHunger: 1
 --- !u!58 &4610756560969618028
 CircleCollider2D:
   m_ObjectHideFlags: 0

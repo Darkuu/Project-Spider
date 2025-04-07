@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7447595644169687976}
   - component: {fileID: 2893186780013201787}
   - component: {fileID: 939043239325303427}
-  - component: {fileID: 6404142099917297525}
+  - component: {fileID: -2950062100747525476}
   m_Layer: 7
   m_Name: '[PH]Sand_Bug'
   m_TagString: Bug
@@ -180,6 +180,7 @@ MonoBehaviour:
   bugItem: {fileID: 11400000, guid: d0f3de6c24b661e4a80651057880ac54, type: 2}
   allowedFoodTag: Food_SandBug
   poopPrefab: {fileID: 4023120096391451991, guid: 54d553693facfdf42bae306608a4a085, type: 3}
+  cooldownTime: 30
   damage: 2
   isHostile: 1
 --- !u!58 &939043239325303427
@@ -218,7 +219,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 5
---- !u!114 &6404142099917297525
+--- !u!114 &-2950062100747525476
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -227,11 +228,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 3677489578875355184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 905bf5eee687394469b441062a2042ed, type: 3}
+  m_Script: {fileID: 11500000, guid: 69692fce6cceba54ba57e91d66cd0894, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
+  chaseSpeed: 2
+  foodDetectionRadius: 5
+  foodTag: Food_SandBug
+  hungerDecrementRate: 0.1
   minChangeDirectionTime: 1
   maxChangeDirectionTime: 3
   minWaitTime: 0.5
   maxWaitTime: 2
+  currentHunger: 1

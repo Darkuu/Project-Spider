@@ -134,8 +134,6 @@ public class NetBugCatcher : MonoBehaviour
 
         // Randomly choose between two sounds
         AudioClip soundToPlay = Random.Range(0f, 1f) > 0.5f ? captureSound1 : captureSound2;
-        float volume = 0.5f;
-
         AudioManager.instance.PlaySFX(soundToPlay); 
     }
 
