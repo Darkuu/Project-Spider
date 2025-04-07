@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class AudioManagerSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject audioManagerPrefab; 
+    [SerializeField] private GameObject audioManagerPrefab;
+    [SerializeField] private AudioClip spawnInSound;
 
     private void Start()
     {
@@ -11,7 +12,9 @@ public class AudioManagerSpawner : MonoBehaviour
             if (audioManagerPrefab != null)
             {
                 GameObject obj = Instantiate(audioManagerPrefab);
+
                 DontDestroyOnLoad(obj);
+                AudioManager.instance.PlaySFX(spawnInSound);
             }
             else
             {

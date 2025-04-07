@@ -27,7 +27,6 @@ public class InventorySlot : MonoBehaviour, IDropHandler
         }
         else
         {
-            Debug.LogWarning("AudioManager.instance or inventorySelectSound is null in InventorySlot.Select()");
         }
     }
 
