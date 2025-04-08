@@ -14,6 +14,15 @@ public class Bug : MonoBehaviour
     public int damage;
     public bool isHostile;
 
+    [Header("Hunger Settings")]
+    [SerializeField] private float totalHunger = 1f;
+    [SerializeField] private float hungerDecreaseRate = 0.01f;
+    [SerializeField] private float hungerThreshold = 0.5f;
+
+    public float CurrentHunger { get; private set; }
+    public bool IsHungry => CurrentHunger <= hungerThreshold * totalHunger;
+
+
     private float cooldownTimer;
     private BugMovement bugMovement;
 
@@ -21,6 +30,7 @@ public class Bug : MonoBehaviour
     {
         cooldownTimer = cooldownTime;
         bugMovement = GetComponent<BugMovement>();
+        CurrentHunger = totalHunger;
     }
 
     private void Update()
@@ -29,6 +39,18 @@ public class Bug : MonoBehaviour
         {
             cooldownTimer -= Time.deltaTime;
         }
+
+        DecreaseHunger();
+    }
+
+    private void DecreaseHunger()
+    {
+        CurrentHunger = Mathf.Clamp(CurrentHunger - hungerDecreaseRate * Time.deltaTime, 0f, totalHunger);
+    }
+
+    public void FillHunger()
+    {
+        CurrentHunger = totalHunger;
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -38,9 +60,7 @@ public class Bug : MonoBehaviour
             DropPoop();
             Destroy(other.gameObject);
             cooldownTimer = cooldownTime;
-
-            // Refill hunger after eating
-            bugMovement.FillHunger();
+            FillHunger();
         }
         else if (other.gameObject.CompareTag("Player") && isHostile)
         {

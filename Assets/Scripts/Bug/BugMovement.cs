@@ -13,17 +13,14 @@ public class BugMovement : MonoBehaviour
     [SerializeField] private float minWaitTime = 0.5f;
     [SerializeField] private float maxWaitTime = 2f;
 
-    [Header("Hunger and Food")]
+    [Header("Food Detection")]
     [SerializeField] private float foodDetectionRadius = 5f;
-    [SerializeField] private float hungerThreshold = 0.5f;
 
     private Rigidbody2D rb;
     private Vector2 moveDirection;
     private Coroutine wanderCoroutine;
     private Transform player;
     private Transform targetFood;
-
-    public float CurrentHunger { get; private set; } = 1f;
 
     private Bug bugScript;
 
@@ -40,7 +37,7 @@ public class BugMovement : MonoBehaviour
         {
             ChasePlayer();
         }
-        else if (CurrentHunger >= hungerThreshold && targetFood != null)
+        else if (bugScript.IsHungry && targetFood != null)
         {
             MoveTowardsFood();
         }
@@ -52,8 +49,6 @@ public class BugMovement : MonoBehaviour
 
     private void Update()
     {
-        DecreaseHunger();
-
         if (!bugScript.isHostile)
         {
             FindClosestFood();
@@ -156,19 +151,9 @@ public class BugMovement : MonoBehaviour
         targetFood = closest;
     }
 
-    private void DecreaseHunger()
-    {
-        CurrentHunger = Mathf.Clamp01(CurrentHunger - Time.deltaTime * 0.01f);
-    }
-
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, foodDetectionRadius);
     }
-    public void FillHunger()
-    {
-        CurrentHunger = 1f;
-    }
-
 }
