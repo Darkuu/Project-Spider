@@ -123,5 +123,20 @@ public class InventoryManager : MonoBehaviour
 
             return null;
     }
+
+    public int GetTotalCount(ItemScript item)
+    {
+        int total = 0;
+        foreach (InventorySlot slot in inventorySlots)
+        {
+            InventoryItem inventoryItem = slot.GetComponentInChildren<InventoryItem>();
+            if (inventoryItem != null && inventoryItem.item == item)
+            {
+                total += inventoryItem.count;
+            }
+        }
+        return total;
+    }
+
 }
 
