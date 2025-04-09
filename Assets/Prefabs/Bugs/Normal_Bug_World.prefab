@@ -183,6 +183,9 @@ MonoBehaviour:
   cooldownTime: 30
   damage: 0
   isHostile: 0
+  totalHunger: 1
+  hungerDecreaseRate: 0.01
+  hungerThreshold: 0.5
 --- !u!114 &589041007590235015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,12 +200,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   chaseSpeed: 2
-  foodDetectionRadius: 3
-  foodTag: Food
-  changeDirectionTime: 3
-  waitTime: 1
-  hungerThreshold: 0.2
-  currentHunger: 1
+  minChangeDirectionTime: 1
+  maxChangeDirectionTime: 3
+  minWaitTime: 0.5
+  maxWaitTime: 2
+  foodDetectionRadius: 5
 --- !u!58 &4610756560969618028
 CircleCollider2D:
   m_ObjectHideFlags: 0

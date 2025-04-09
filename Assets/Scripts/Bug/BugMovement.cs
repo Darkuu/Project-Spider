@@ -29,7 +29,25 @@ public class BugMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         bugScript = GetComponent<Bug>();
         Wander();
+
+        if (!bugScript.isHostile)
+        {
+            StartCoroutine(CheckForFoodRoutine());
+        }
     }
+
+    private IEnumerator CheckForFoodRoutine()
+    {
+        while (true)
+        {
+            if (bugScript.IsHungry)
+            {
+                FindClosestFood();
+            }
+            yield return new WaitForSeconds(0.5f); 
+        }
+    }
+
 
     private void FixedUpdate()
     {
