@@ -59,6 +59,11 @@ public class CustomHierarchyColor : MonoBehaviour
                 backgroundColor = new Color(1f, 0f, 1f); 
                 textColor = new Color(0.9f, 0.9f, 0.9f); 
             }
+            else if (objName.Contains("areas"))
+            {
+                backgroundColor = new Color(0.5f, 0.5f, 0f);
+                textColor = new Color(0.9f, 0.9f, 0.9f);
+            }
 
             // If we have a color, draw it
             if (backgroundColor != Color.white)
