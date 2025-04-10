@@ -183,6 +183,9 @@ MonoBehaviour:
   cooldownTime: 30
   damage: 2
   isHostile: 1
+  totalHunger: 1
+  hungerDecreaseRate: 0.01
+  hungerThreshold: 0.5
 --- !u!58 &939043239325303427
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -233,11 +236,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   chaseSpeed: 2
-  foodDetectionRadius: 5
-  foodTag: Food_SandBug
-  hungerDecrementRate: 0.1
   minChangeDirectionTime: 1
   maxChangeDirectionTime: 3
   minWaitTime: 0.5
   maxWaitTime: 2
-  currentHunger: 1
+  foodDetectionRadius: 5
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 256
+  obstacleCheckDistance: 0.5

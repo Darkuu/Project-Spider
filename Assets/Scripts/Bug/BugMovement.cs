@@ -16,6 +16,9 @@ public class BugMovement : MonoBehaviour
     [Header("Food Detection")]
     [SerializeField] private float foodDetectionRadius = 5f;
 
+    [Header("Layer Mask Settings")]
+    [SerializeField] private LayerMask wallLayer;
+
     private Rigidbody2D rb;
     private Vector2 moveDirection;
     private Coroutine wanderCoroutine;
@@ -24,10 +27,13 @@ public class BugMovement : MonoBehaviour
 
     private Bug bugScript;
 
+    private BoxCollider2D bugCollider;  // The bug's Collider2D (we'll use this for detection)
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         bugScript = GetComponent<Bug>();
+        bugCollider = GetComponent<BoxCollider2D>(); // Get the bug's BoxCollider2D
         Wander();
 
         if (!bugScript.isHostile)
@@ -44,10 +50,9 @@ public class BugMovement : MonoBehaviour
             {
                 FindClosestFood();
             }
-            yield return new WaitForSeconds(0.5f); 
+            yield return new WaitForSeconds(0.5f);
         }
     }
-
 
     private void FixedUpdate()
     {
@@ -91,10 +96,35 @@ public class BugMovement : MonoBehaviour
         }
     }
 
+    private float directionChangeCooldown = 0.5f;
+    private float timeSinceLastDirectionChange = 0f;
+
     private void Move()
     {
+        timeSinceLastDirectionChange += Time.fixedDeltaTime;
+
+        // Move the bug forward based on its current direction
         Vector2 newPosition = rb.position + moveDirection * moveSpeed * Time.fixedDeltaTime;
+
+        // Check if the bug's collider touches anything in front (based on the direction it's moving)
+        if (IsObstacleInFront())
+        {
+            moveDirection = GetRandomDirection(); // Change direction if there's an obstacle
+            timeSinceLastDirectionChange = 0f;
+        }
+
+        // Move the bug and rotate it
+        RotateTowards(moveDirection);
         rb.MovePosition(newPosition);
+    }
+
+    private bool IsObstacleInFront()
+    {
+        // Check if the bug's collider is touching an obstacle in front (using its current direction)
+        Vector2 frontPosition = (Vector2)transform.position + moveDirection * 0.5f;  // Move a little forward
+        Collider2D hit = Physics2D.OverlapBox(frontPosition, bugCollider.size, 0f, wallLayer);
+
+        return hit != null;
     }
 
     private void MoveTowardsFood()
@@ -102,7 +132,9 @@ public class BugMovement : MonoBehaviour
         if (targetFood == null) return;
 
         Vector2 direction = ((Vector2)targetFood.position - rb.position).normalized;
-        rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+        Vector2 newPosition = rb.position + direction * moveSpeed * Time.fixedDeltaTime;
+        RotateTowards(targetFood.position);
+        rb.MovePosition(newPosition);
     }
 
     private void ChasePlayer()
@@ -110,7 +142,18 @@ public class BugMovement : MonoBehaviour
         if (player == null) return;
 
         Vector2 direction = ((Vector2)player.position - rb.position).normalized;
-        rb.MovePosition(rb.position + direction * chaseSpeed * Time.fixedDeltaTime);
+        Vector2 newPosition = rb.position + direction * chaseSpeed * Time.fixedDeltaTime;
+        RotateTowards(player.position);
+        rb.MovePosition(newPosition);
+    }
+
+    private void RotateTowards(Vector2 direction)
+    {
+        if (direction == Vector2.zero) return;
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle -= 90f;
+        rb.rotation = Mathf.LerpAngle(rb.rotation, angle, 0.1f);
     }
 
     private void Wander()
@@ -143,7 +186,8 @@ public class BugMovement : MonoBehaviour
 
     private Vector2 GetRandomDirection()
     {
-        return new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+        float angle = Random.Range(0f, 360f);
+        return new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
     }
 
     private void FindClosestFood()
@@ -173,5 +217,12 @@ public class BugMovement : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, foodDetectionRadius);
+
+        // Draw a box around the bug to visualize its collision area
+        if (bugCollider != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(transform.position, bugCollider.size);
+        }
     }
 }
