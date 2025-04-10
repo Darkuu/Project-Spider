@@ -18,6 +18,11 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 knockbackDirection;
     private bool hasMoved = false;
 
+    // Smooth movement variables
+    private Vector2 currentVelocity;
+    [SerializeField] private float acceleration = 10f;
+    [SerializeField] private float deceleration = 8f; 
+
     private void Start()
     {
         tutorialPopup = FindFirstObjectByType<TutorialPopup>();
@@ -34,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
         if (!hasMoved && (horizontal != 0 || vertical != 0))
         {
             hasMoved = true;
-            tutorialPopup?.CompleteStep("playerMove"); 
+            tutorialPopup?.CompleteStep("playerMove");
         }
     }
 
@@ -42,13 +47,26 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isKnockedBack) return;
 
-        float speed = GetCurrentSpeed();
+        float targetSpeed = GetCurrentSpeed();
         Vector2 moveDirection = new Vector2(horizontal, vertical);
+        
+        // Normalize the movement direction if it exceeds 1
+
         if (moveDirection.magnitude > 1)
         {
             moveDirection = moveDirection.normalized;
         }
-        rb.linearVelocity = moveDirection * speed;
+
+        // Smooth acceleration and deceleration
+        if (moveDirection.magnitude > 0)
+        {
+            currentVelocity = Vector2.Lerp(currentVelocity, moveDirection * targetSpeed, acceleration * Time.deltaTime);
+        }
+        else
+        {
+            currentVelocity = Vector2.Lerp(currentVelocity, Vector2.zero, deceleration * Time.deltaTime);
+        }
+        rb.linearVelocity = currentVelocity;
     }
 
     private float GetCurrentSpeed()
@@ -64,8 +82,9 @@ public class PlayerMovement : MonoBehaviour
     public void ApplyKnockback(Vector2 damageSource)
     {
         if (rb == null) return;
+
         knockbackDirection = (transform.position - (Vector3)damageSource).normalized;
-        rb.linearVelocity = knockbackDirection * knockbackForce;
+        rb.linearVelocity = knockbackDirection * knockbackForce;  
         isKnockedBack = true;
         StartCoroutine(GradualKnockbackReduction());
     }
@@ -74,7 +93,6 @@ public class PlayerMovement : MonoBehaviour
     {
         float initialForce = knockbackForce;
         float elapsedTime = 0f;
-        float knockbackDuration = 0.5f;
 
         while (elapsedTime < knockbackDuration)
         {
@@ -84,13 +102,7 @@ public class PlayerMovement : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        rb.linearVelocity = Vector2.zero;
-        isKnockedBack = false;
-    }
-
-    private IEnumerator ResetMovementAfterKnockback()
-    {
-        yield return new WaitForSeconds(knockbackDuration);
+        rb.linearVelocity = Vector2.zero;  
         isKnockedBack = false;
     }
 }
