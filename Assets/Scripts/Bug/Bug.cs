@@ -17,11 +17,11 @@ public class Bug : MonoBehaviour
     [Header("Hunger Settings")]
     [SerializeField] private float totalHunger = 1f;
     [SerializeField] private float hungerDecreaseRate = 0.01f;
-    [SerializeField] private float hungerThreshold = 0.5f;
 
     public float CurrentHunger { get; private set; }
-    public bool IsHungry => CurrentHunger <= hungerThreshold * totalHunger;
 
+    private bool isHungry = false;  // Manage hunger state here
+    public bool IsHungry => isHungry || CurrentHunger <= 0f;  // Hungry when either isHungry is true or hunger is <= 0
 
     private float cooldownTimer;
     private BugMovement bugMovement;
@@ -51,6 +51,7 @@ public class Bug : MonoBehaviour
     public void FillHunger()
     {
         CurrentHunger = totalHunger;
+        isHungry = false;  // Reset hunger state when filled
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -75,5 +76,18 @@ public class Bug : MonoBehaviour
     private void DropPoop()
     {
         Instantiate(poopPrefab, transform.position, Quaternion.identity);
+    }
+
+    // Triggered while the bug is touching something
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.CompareTag(allowedFoodTag))
+        {
+            // If the bug is touching food and its hunger is 0 or lower, make it hungry
+            if (CurrentHunger <= 0f)
+            {
+                isHungry = true;  // Set the hungry state to true
+            }
+        }
     }
 }
