@@ -93,7 +93,7 @@ MonoBehaviour:
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 2
-    m_Scale: 1.5
+    m_Scale: 1.6
     m_Name: FlyEgg
   - m_ElementType: 2
     m_Unicode: 65534
@@ -110,9 +110,9 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 226.9304
       m_Height: 287.86508
-      m_HorizontalBearingX: -59
-      m_HorizontalBearingY: 181.3
-      m_HorizontalAdvance: 226.9304
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 200
+      m_HorizontalAdvance: 150
     m_GlyphRect:
       m_X: 910
       m_Y: 883
@@ -126,9 +126,9 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 216.61539
       m_Height: 289.74042
-      m_HorizontalBearingX: -108.30769
-      m_HorizontalBearingY: 144.87021
-      m_HorizontalAdvance: 216.61539
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 200
+      m_HorizontalAdvance: 150
     m_GlyphRect:
       m_X: 232
       m_Y: 881
@@ -142,9 +142,9 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 150.03664
       m_Height: 298.17944
-      m_HorizontalBearingX: -75.01832
-      m_HorizontalBearingY: 149.08972
-      m_HorizontalAdvance: 150.03664
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 200
+      m_HorizontalAdvance: 150
     m_GlyphRect:
       m_X: 1631
       m_Y: 877
@@ -174,9 +174,9 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 682.6667
       m_Height: 685.4377
-      m_HorizontalBearingX: -338.3
+      m_HorizontalBearingX: -450
       m_HorizontalBearingY: 530.2
-      m_HorizontalAdvance: 682.6667
+      m_HorizontalAdvance: 400
     m_GlyphRect:
       m_X: 682
       m_Y: 0
