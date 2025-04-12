@@ -99,7 +99,7 @@ MonoBehaviour:
     m_Unicode: 65534
     m_GlyphIndex: 3
     m_Scale: 1.5
-    m_Name: IceEgg
+    m_Name: SnowEgg
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 4
@@ -158,9 +158,9 @@ MonoBehaviour:
     m_Metrics:
       m_Width: 204.42491
       m_Height: 346.0007
-      m_HorizontalBearingX: -102.212456
-      m_HorizontalBearingY: 173.00035
-      m_HorizontalAdvance: 204.42491
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 229.4
+      m_HorizontalAdvance: 200
     m_GlyphRect:
       m_X: 239
       m_Y: 169
