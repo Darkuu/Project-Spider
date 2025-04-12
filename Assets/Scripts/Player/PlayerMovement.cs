@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float knockbackDuration = 0.2f;
 
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Animator animator;
 
     private TutorialPopup tutorialPopup;
     private bool isKnockedBack = false;
@@ -41,6 +42,9 @@ public class PlayerMovement : MonoBehaviour
             hasMoved = true;
             tutorialPopup?.CompleteStep("playerMove");
         }
+        
+        UpdateAnimation();
+        
     }
 
     private void FixedUpdate()
@@ -67,6 +71,23 @@ public class PlayerMovement : MonoBehaviour
             currentVelocity = Vector2.Lerp(currentVelocity, Vector2.zero, deceleration * Time.deltaTime);
         }
         rb.linearVelocity = currentVelocity;
+    }
+    
+    private void UpdateAnimation()
+    {
+        Vector2 moveInput = new Vector2(horizontal, vertical);
+
+        // Pick dominant axis only
+        if (Mathf.Abs(moveInput.x) > Mathf.Abs(moveInput.y))
+            moveInput = new Vector2(Mathf.Sign(moveInput.x), 0);
+        else if (Mathf.Abs(moveInput.y) > 0)
+            moveInput = new Vector2(0, Mathf.Sign(moveInput.y));
+        else
+            moveInput = Vector2.zero;
+
+        animator.SetFloat("MoveX", moveInput.x, 0.1f, Time.deltaTime);
+        animator.SetFloat("MoveY", moveInput.y, 0.1f, Time.deltaTime);
+        animator.SetBool("IsMoving", moveInput.magnitude > 0.01f);
     }
 
     private float GetCurrentSpeed()
