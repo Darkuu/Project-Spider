@@ -9,7 +9,6 @@ public class TutorialPopup : MonoBehaviour
     [System.Serializable]
     public class TutorialStep
     {
-        [Header("Tutorial Step Properties")]
         public string title;
         public string description;
         public Sprite icon;
@@ -17,15 +16,11 @@ public class TutorialPopup : MonoBehaviour
         public GameObject triggerZone;
         public bool autoTriggerNextStep;
 
-        [Header("Auto Complete")]
         public bool autoCompleteStep = false;
-        public float autoCompleteDelay = 3f; // seconds
+        public float autoCompleteDelay = 3f;
     }
 
-    [Header("Tutorial Steps")]
     public List<TutorialStep> tutorialSteps;
-
-    [Header("Assignables")]
     public GameObject popupUI;
     public TMP_Text titleText;
     public TMP_Text descriptionText;
@@ -34,16 +29,17 @@ public class TutorialPopup : MonoBehaviour
     public AudioClip tutorialStepCompleteSound;
 
     public float stepDelay = 2f;
+    public KeyCode closeKey = KeyCode.X;
 
     private int currentStep = -1;
     private bool isTutorialActive = false;
-
     private HashSet<string> completedActions = new HashSet<string>();
 
     private void Start()
     {
-        popupUI.SetActive(false);
+        popupUI.SetActive(false); // Ensure popup is hidden at the start
 
+        // Set up trigger zones if they exist
         for (int i = 0; i < tutorialSteps.Count; i++)
         {
             var step = tutorialSteps[i];
@@ -54,6 +50,7 @@ public class TutorialPopup : MonoBehaviour
             }
         }
 
+        // Start tutorial if there are steps
         if (tutorialSteps.Count > 0)
         {
             Invoke(nameof(StartTutorial), stepDelay);
@@ -78,11 +75,13 @@ public class TutorialPopup : MonoBehaviour
         currentStep = stepIndex;
         var step = tutorialSteps[stepIndex];
 
+        // Hide the trigger zone after it has been triggered
         if (step.triggerZone != null)
         {
             step.triggerZone.SetActive(false);
         }
 
+        // Show the tutorial UI and set the content
         popupUI.SetActive(true);
         titleText.text = step.title;
         descriptionText.text = step.description;
@@ -100,7 +99,7 @@ public class TutorialPopup : MonoBehaviour
 
         isTutorialActive = true;
 
-        // ✅ NEW: Start auto-complete if enabled
+        // Auto-complete step if enabled
         if (step.autoCompleteStep)
         {
             StartCoroutine(AutoCompleteStepAfterDelay(step.actionToComplete, step.autoCompleteDelay));
@@ -113,16 +112,16 @@ public class TutorialPopup : MonoBehaviour
 
         completedActions.Add(action);
 
-        // If this is the current step, mark as complete and optionally move to next
+        // Mark current step as complete and hide the UI
         if (isTutorialActive && currentStep != -1 && tutorialSteps[currentStep].actionToComplete == action)
         {
             AudioManager.instance.PlaySFX(tutorialStepCompleteSound);
-            popupUI.SetActive(false);
+            popupUI.SetActive(false); // Hide the tutorial UI when completed
             isTutorialActive = false;
 
+            // Move to next step if available
             int nextStep = currentStep + 1;
-
-            if (nextStep < tutorialSteps.Count && tutorialSteps[nextStep].autoTriggerNextStep)
+            if (nextStep < tutorialSteps.Count)
             {
                 Invoke(nameof(TriggerNextStep), stepDelay);
             }
@@ -143,9 +142,23 @@ public class TutorialPopup : MonoBehaviour
             CompleteStep(action);
         }
     }
+
+    public void CloseTutorial()
+    {
+        // Just hide the UI, but don't stop the tutorial flow
+        popupUI.SetActive(false);
+        isTutorialActive = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(closeKey)) // Close the tutorial UI when the player presses the close key
+        {
+            CloseTutorial();
+        }
+    }
 }
 
-// ✅ Still bundled for simplicity
 class TutorialStepTrigger : MonoBehaviour
 {
     private TutorialPopup tutorialPopup;
