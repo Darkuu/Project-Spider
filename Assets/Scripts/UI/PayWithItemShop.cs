@@ -10,8 +10,11 @@ public class PayWithItemShop : MonoBehaviour
         public int count;
     }
 
-    public List<PurchaseCost> requiredItems;
+    [Header("Item and Coin Cost")]
+    public List<PurchaseCost> requiredItems = new List<PurchaseCost>();
+    public int coinPrice = 0;
 
+    [Header("Shop Actions")]
     public List<GameObject> objectsToActivate;
     public List<GameObject> objectsToDeactivate;
     public List<GameObject> objectsToSpawn;
@@ -19,9 +22,14 @@ public class PayWithItemShop : MonoBehaviour
 
     public void OnPurchaseButtonPressed()
     {
-        if (HasRequiredItems())
+        bool hasItems = HasRequiredItems();
+        bool canAffordCoins = MoneyManager.instance.SpendCoins(coinPrice);
+
+        // If both items and coins are required, you can adjust logic below
+        if ((requiredItems.Count == 0 || hasItems) && canAffordCoins)
         {
-            RemoveRequiredItems();
+            if (requiredItems.Count > 0)
+                RemoveRequiredItems();
 
             // Deactivate objects
             foreach (GameObject obj in objectsToDeactivate)
@@ -48,7 +56,10 @@ public class PayWithItemShop : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough items to complete the purchase.");
+            if (!hasItems && requiredItems.Count > 0)
+                Debug.Log("Not enough items to complete the purchase.");
+            if (!canAffordCoins)
+                Debug.Log("Not enough coins to complete the purchase.");
         }
     }
 
