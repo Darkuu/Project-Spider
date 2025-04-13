@@ -59,7 +59,7 @@ public class AudioManager : MonoBehaviour
     }
 
     // ========== SFX ==========
-    public void PlaySFX(AudioClip clip, float volumeMultiplier = 1f)
+    public void PlaySFX(AudioClip clip, float volumeMultiplier = 1f, float pitch = 1f)
     {
         if (clip == null) return;
 
@@ -68,8 +68,10 @@ public class AudioManager : MonoBehaviour
 
         source.clip = clip;
         source.volume = sfxVolume * volumeMultiplier;
+        source.pitch = pitch;
         source.Play();
     }
+
 
     public void SetSFXVolume(float volume)
     {

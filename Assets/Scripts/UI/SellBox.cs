@@ -3,17 +3,15 @@ using System.Collections;
 
 public class SellBox : MonoBehaviour
 {
-    public AudioSource sellSound;
+    public AudioClip sellSound;
 
     [SerializeField] private float basePitch = 1.0f;
     [SerializeField] private float pitchMultiplier = 1.2f;
     [SerializeField] private float maxPitch = 2.5f; 
     [SerializeField] private float resetTime = 5f;
     private Coroutine resetCoroutine;
-
-
-
-        private TutorialPopup tutorialPopup;
+    private float previousPitch = 1f;
+    private TutorialPopup tutorialPopup;
 
     private void Start()
     {
@@ -42,22 +40,20 @@ public class SellBox : MonoBehaviour
 
     private void PlaySellSound()
     {
-        if (sellSound != null)
-        {
-            sellSound.pitch = Mathf.Min(sellSound.pitch * pitchMultiplier, maxPitch);
-            sellSound.Play();
+            previousPitch = Mathf.Min(previousPitch * pitchMultiplier, maxPitch);
+            AudioManager.instance.PlaySFX(sellSound, 1f, previousPitch);
 
             if (resetCoroutine != null)
             {
                 StopCoroutine(resetCoroutine);
             }
             resetCoroutine = StartCoroutine(ResetPitchAfterDelay());
-        }
     }
 
     private IEnumerator ResetPitchAfterDelay()
     {
         yield return new WaitForSeconds(resetTime);
-        sellSound.pitch = basePitch; 
+        previousPitch = basePitch; 
     }
+
 }

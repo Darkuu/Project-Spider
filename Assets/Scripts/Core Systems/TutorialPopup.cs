@@ -112,21 +112,20 @@ public class TutorialPopup : MonoBehaviour
 
         completedActions.Add(action);
 
-        // Mark current step as complete and hide the UI
         if (isTutorialActive && currentStep != -1 && tutorialSteps[currentStep].actionToComplete == action)
         {
             AudioManager.instance.PlaySFX(tutorialStepCompleteSound);
-            popupUI.SetActive(false); // Hide the tutorial UI when completed
+            popupUI.SetActive(false);
             isTutorialActive = false;
 
-            // Move to next step if available
             int nextStep = currentStep + 1;
-            if (nextStep < tutorialSteps.Count)
+            if (nextStep < tutorialSteps.Count && tutorialSteps[currentStep].autoTriggerNextStep)
             {
                 Invoke(nameof(TriggerNextStep), stepDelay);
             }
         }
     }
+
 
     public void TriggerNextStep()
     {
