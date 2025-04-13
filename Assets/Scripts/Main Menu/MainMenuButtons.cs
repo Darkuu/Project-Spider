@@ -1,12 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class MainMenuButtons : MonoBehaviour
 {
-    public Animator transition;
+    public Animator transition; 
     [SerializeField] private float transitionTime;
     [SerializeField] private float fadeOutDuration = 1f; 
+
 
     public void PlayGame()
     {
