@@ -638,9 +638,10 @@ MonoBehaviour:
   requiredItems:
   - item: {fileID: 11400000, guid: 43b0d9fff67369243a3ecf12f85dead4, type: 2}
     count: 10
-  objectToActivate: {fileID: 0}
-  objectToDeactivate: {fileID: 0}
-  objectToSpawn: {fileID: 0}
+  coinPrice: 0
+  objectsToActivate: []
+  objectsToDeactivate: []
+  objectsToSpawn: []
   spawnPoint: {fileID: 0}
 --- !u!1 &5377940121833785648
 GameObject:
@@ -702,7 +703,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 900
   m_TargetDisplay: 0
 --- !u!114 &1749816616242940617
 MonoBehaviour:
