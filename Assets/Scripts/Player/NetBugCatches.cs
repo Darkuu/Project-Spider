@@ -19,7 +19,11 @@ public class NetBugCatcher : MonoBehaviour
     [SerializeField] private float minDropCooldown = 0.1f;
     [SerializeField] private float dropAcceleration = 0.05f;
 
+    [Header("Cooldown Settings")]
+    [SerializeField] private float pickupToPlaceCooldown = 0.25f;
+
     private float currentDropCooldown;
+    private float lastCaptureTime = -Mathf.Infinity;
     private bool isPlacing;
     private TutorialPopup tutorialPopup;
 
@@ -45,10 +49,11 @@ public class NetBugCatcher : MonoBehaviour
         {
             StartCoroutine(PlaceItemRoutine());
         }
+
         if (Input.GetMouseButtonUp(0))
         {
             isPlacing = false;
-            currentDropCooldown = initialDropCooldown; 
+            currentDropCooldown = initialDropCooldown;
         }
     }
 
@@ -65,7 +70,11 @@ public class NetBugCatcher : MonoBehaviour
             if (!collider.isTrigger)
             {
                 ItemScript item = TryCaptureItem(collider);
-                if (item != null) Destroy(collider.gameObject);
+                if (item != null)
+                {
+                    Destroy(collider.gameObject);
+                    lastCaptureTime = Time.time; // Start cooldown after capture
+                }
             }
         }
     }
@@ -105,16 +114,19 @@ public class NetBugCatcher : MonoBehaviour
             PlaceItem();
             yield return new WaitForSeconds(currentDropCooldown);
 
-            // Gradually decrease cooldown but never go below minDropCooldown
             currentDropCooldown = Mathf.Max(minDropCooldown, currentDropCooldown - dropAcceleration);
         }
 
         isPlacing = false;
-        currentDropCooldown = initialDropCooldown; // Reset cooldown when releasing
+        currentDropCooldown = initialDropCooldown;
     }
 
     private void PlaceItem()
     {
+        // Prevent placing too soon after capturing
+        if (Time.time - lastCaptureTime < pickupToPlaceCooldown)
+            return;
+
         ItemScript selectedItem = InventoryManager.instance.GetSelectedItem(false);
         if (selectedItem != null)
         {
@@ -132,9 +144,8 @@ public class NetBugCatcher : MonoBehaviour
     {
         if (captureSound1 == null || captureSound2 == null) return;
 
-        // Randomly choose between two sounds
         AudioClip soundToPlay = Random.Range(0f, 1f) > 0.5f ? captureSound1 : captureSound2;
-        AudioManager.instance.PlaySFX(soundToPlay); 
+        AudioManager.instance.PlaySFX(soundToPlay);
     }
 
     private void RotateAroundPlayer()
@@ -149,7 +160,7 @@ public class NetBugCatcher : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Vector2 center = (Vector2)transform.position;

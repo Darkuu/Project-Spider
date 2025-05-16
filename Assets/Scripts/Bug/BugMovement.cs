@@ -96,7 +96,6 @@ public class BugMovement : MonoBehaviour
         }
     }
 
-    private float directionChangeCooldown = 0.5f;
     private float timeSinceLastDirectionChange = 0f;
 
     private void Move()
