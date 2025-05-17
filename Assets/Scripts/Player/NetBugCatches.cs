@@ -22,6 +22,9 @@ public class NetBugCatcher : MonoBehaviour
     [Header("Cooldown Settings")]
     [SerializeField] private float pickupToPlaceCooldown = 0.25f;
 
+    [Header("Effects")]
+    [SerializeField] private ParticleSystem captureEffect;
+
     private float currentDropCooldown;
     private float lastCaptureTime = -Mathf.Infinity;
     private bool isPlacing;
@@ -74,6 +77,10 @@ public class NetBugCatcher : MonoBehaviour
                 {
                     Destroy(collider.gameObject);
                     lastCaptureTime = Time.time; // Start cooldown after capture
+
+                    // Play sound and particle effect at the caught object's position
+                    PlayRandomSound();
+                    PlayCaptureEffect(collider.transform.position);
                 }
             }
         }
@@ -87,19 +94,16 @@ public class NetBugCatcher : MonoBehaviour
         {
             item = bugComp.bugItem;
             tutorialPopup?.CompleteStep("CatchBug");
-            PlayRandomSound();
         }
         else if (collider.TryGetComponent(out Food foodComp) && foodComp.foodItem != null)
         {
             item = foodComp.foodItem;
             tutorialPopup?.CompleteStep("CatchFood");
-            PlayRandomSound();
         }
         else if (collider.TryGetComponent(out EggItem eggComp) && eggComp.eggItem != null)
         {
             item = eggComp.eggItem;
             tutorialPopup?.CompleteStep("CatchEgg");
-            PlayRandomSound();
         }
 
         return (item != null && InventoryManager.instance.AddItem(item)) ? item : null;
@@ -123,7 +127,6 @@ public class NetBugCatcher : MonoBehaviour
 
     private void PlaceItem()
     {
-        // Prevent placing too soon after capturing
         if (Time.time - lastCaptureTime < pickupToPlaceCooldown)
             return;
 
@@ -146,6 +149,16 @@ public class NetBugCatcher : MonoBehaviour
 
         AudioClip soundToPlay = Random.Range(0f, 1f) > 0.5f ? captureSound1 : captureSound2;
         AudioManager.instance.PlaySFX(soundToPlay);
+    }
+
+    private void PlayCaptureEffect(Vector3 position)
+    {
+        if (captureEffect == null) return;
+
+        ParticleSystem effect = Instantiate(captureEffect, position, Quaternion.identity);
+        effect.Play();
+
+        Destroy(effect.gameObject, effect.main.duration + effect.main.startLifetime.constantMax);
     }
 
     private void RotateAroundPlayer()
