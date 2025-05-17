@@ -160,13 +160,18 @@ public class BugMovement : MonoBehaviour
 
     private void FindClosestFood()
     {
-        var hits = Physics2D.OverlapCircleAll(transform.position, foodDetectionRadius, foodLayer);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, foodDetectionRadius, foodLayer);
         Transform closest = null;
         float bestDist = float.PositiveInfinity;
 
         foreach (var c in hits)
         {
-            if (c.CompareTag(bugScript.allowedFoodTag))
+            bool isValidFood = !string.IsNullOrEmpty(bugScript.allowedFoodTag) && c.CompareTag(bugScript.allowedFoodTag);
+            bool isValidBug = !bugScript.isHostile
+                              && !string.IsNullOrEmpty(bugScript.allowedBugTag)
+                              && c.CompareTag(bugScript.allowedBugTag);
+
+            if (isValidFood || isValidBug)
             {
                 float d = Vector2.Distance(transform.position, c.transform.position);
                 if (d < bestDist)
@@ -179,6 +184,9 @@ public class BugMovement : MonoBehaviour
 
         targetFood = closest;
     }
+
+
+
 
     private void OnDrawGizmosSelected()
     {

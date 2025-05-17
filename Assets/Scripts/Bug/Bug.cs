@@ -12,11 +12,18 @@ public class Bug : MonoBehaviour
     [Header("Bug Brain Logic")]
     public float cooldownTime = 30f;
     public int damage;
-    public bool isHostile;
 
     [Header("Hunger Settings")]
     [SerializeField] private float totalHunger = 1f;
     [SerializeField] private float hungerDecreaseRate = 0.01f;
+
+    [Header("Special Behavior")]
+    public bool isHostile;
+    public bool eatsOtherBugs = false;
+
+    [Tooltip("Tag that this bug can eat if it eats other bugs")]
+    public string allowedBugTag;
+
 
     public float CurrentHunger { get; private set; }
     public bool IsHungry => CurrentHunger <= totalHunger * 0.5f;
@@ -69,5 +76,17 @@ public class Bug : MonoBehaviour
             var stats = collision.gameObject.GetComponent<PlayerStats>();
             stats?.TakeDamage(damage, transform.position);
         }
+        else if (eatsOtherBugs && collision.gameObject.CompareTag(allowedBugTag) && cooldownTimer <= 0f)
+        {
+            var otherBug = collision.gameObject.GetComponent<Bug>();
+            if (otherBug != null && !otherBug.isHostile)
+            {
+                Destroy(collision.gameObject); 
+                Instantiate(poopPrefab, transform.position, Quaternion.identity);
+                FillHunger();
+                GetComponent<BugMovement>().ClearFoodTarget();
+            }
+        }
+
     }
 }
