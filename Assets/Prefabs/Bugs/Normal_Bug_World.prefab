@@ -139,7 +139,6 @@ MonoBehaviour:
   isHostile: 0
   totalHunger: 1
   hungerDecreaseRate: 0.01
-  hungerThreshold: 0.5
 --- !u!114 &589041007590235015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,11 +153,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   chaseSpeed: 5
+  rotationSmooth: 0.1
   minChangeDirectionTime: 1
   maxChangeDirectionTime: 10
   minWaitTime: 1
   maxWaitTime: 10
   foodDetectionRadius: 5
+  foodLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   wallLayer:
     serializedVersion: 2
     m_Bits: 256

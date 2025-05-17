@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Bug : MonoBehaviour
 {
@@ -19,75 +19,55 @@ public class Bug : MonoBehaviour
     [SerializeField] private float hungerDecreaseRate = 0.01f;
 
     public float CurrentHunger { get; private set; }
-
-    private bool isHungry = false;  // Manage hunger state here
-    public bool IsHungry => isHungry || CurrentHunger <= 0f;  // Hungry when either isHungry is true or hunger is <= 0
+    public bool IsHungry => CurrentHunger <= totalHunger * 0.5f;
 
     private float cooldownTimer;
-    private BugMovement bugMovement;
 
     private void Start()
     {
+        CurrentHunger = totalHunger * 0.5f;
         cooldownTimer = cooldownTime;
-        bugMovement = GetComponent<BugMovement>();
-        CurrentHunger = totalHunger;
     }
 
     private void Update()
     {
         if (cooldownTimer > 0f)
-        {
             cooldownTimer -= Time.deltaTime;
-        }
 
-        DecreaseHunger();
+        CurrentHunger = Mathf.Clamp(
+            CurrentHunger - hungerDecreaseRate * Time.deltaTime,
+            0f,
+            totalHunger
+        );
     }
 
-    private void DecreaseHunger()
+    public bool CanEat()
     {
-        CurrentHunger = Mathf.Clamp(CurrentHunger - hungerDecreaseRate * Time.deltaTime, 0f, totalHunger);
+        // Only non‑hostile bugs that are hungry and out of cooldown can chase/eat
+        return !isHostile && IsHungry && cooldownTimer <= 0f;
     }
 
     public void FillHunger()
     {
         CurrentHunger = totalHunger;
-        isHungry = false;  // Reset hunger state when filled
+        cooldownTimer = cooldownTime;
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.gameObject.CompareTag(allowedFoodTag) && cooldownTimer <= 0f)
+        if (collision.gameObject.CompareTag(allowedFoodTag) && cooldownTimer <= 0f)
         {
-            DropPoop();
-            Destroy(other.gameObject);
-            cooldownTimer = cooldownTime;
+            Instantiate(poopPrefab, transform.position, Quaternion.identity);
+            Destroy(collision.gameObject);
             FillHunger();
-        }
-        else if (other.gameObject.CompareTag("Player") && isHostile)
-        {
-            PlayerStats playerHealth = other.gameObject.GetComponent<PlayerStats>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(damage, transform.position);
-            }
-        }
-    }
 
-    private void DropPoop()
-    {
-        Instantiate(poopPrefab, transform.position, Quaternion.identity);
-    }
-
-    // Triggered while the bug is touching something
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.CompareTag(allowedFoodTag))
+            // Tell the movement script to clear its target
+            GetComponent<BugMovement>().ClearFoodTarget();
+        }
+        else if (collision.gameObject.CompareTag("Player") && isHostile)
         {
-            // If the bug is touching food and its hunger is 0 or lower, make it hungry
-            if (CurrentHunger <= 0f)
-            {
-                isHungry = true;  // Set the hungry state to true
-            }
+            var stats = collision.gameObject.GetComponent<PlayerStats>();
+            stats?.TakeDamage(damage, transform.position);
         }
     }
 }
