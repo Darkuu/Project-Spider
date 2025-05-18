@@ -54,6 +54,9 @@ public class BugMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!bugScript.isHostile)
+            player = null;
+
         if (bugScript.isHostile && player != null)
         {
             ChasePlayer();
@@ -67,6 +70,7 @@ public class BugMovement : MonoBehaviour
             Move();
         }
     }
+
 
     public void ClearFoodTarget()
     {

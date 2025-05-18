@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4d5b429af8c983b40bae160ed95cdeeb, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.04705883, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -262,4 +262,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65bfc069fa27d9049916662c100e61e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  despawnTime: 120
+  despawnTime: 12
+  despawnEffect: {fileID: 1448115582611839688, guid: 8e1c068b12453404c9d85d8c5e554e87, type: 3}
