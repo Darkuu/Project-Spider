@@ -22,7 +22,7 @@ public class ItemScript : ScriptableObject
     [Header("Egg Interaction")]
     public bool isEggItem = false; 
     public GameObject eggPlacementPrefab;
-    public int sellValue;
+    public float sellValue;
 
 
 

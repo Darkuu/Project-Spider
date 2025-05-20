@@ -5,8 +5,8 @@ using TMPro;
 public class MoneyManager : MonoBehaviour
 {
     public static MoneyManager instance;
-    public int coinCount = 0;       // Player starts with 0 coins
-    public TMP_Text coinUIText;         // Assign your UI Text element in the Inspector
+    public float coinCount = 0;       
+    public TMP_Text coinUIText;        
 
     private void Awake()
     {
@@ -21,17 +21,13 @@ public class MoneyManager : MonoBehaviour
         UpdateUI();
     }
 
-    public void AddCoins(int amount)
+    public void AddCoins(float  amount)
     {
         coinCount += amount;
         UpdateUI();
     }
 
-    /// <summary>
-    /// Attempts to spend the specified amount of coins.
-    /// Returns true if successful; false if insufficient coins.
-    /// </summary>
-    public bool SpendCoins(int amount)
+    public bool SpendCoins(float amount)
     {
         if (coinCount >= amount)
         {

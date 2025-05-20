@@ -69,7 +69,7 @@ public class SellBox : MonoBehaviour
             saleData.salesCount++;
             tutorialPopup?.CompleteStep("SellEgg");
 
-            int value = egg.eggItem.sellValue;
+            float value = egg.eggItem.sellValue;
             MoneyManager.instance.AddCoins(value);
             ShowFloatingText($"+{value}   <sprite name=Coin>" , Color.green);
 
