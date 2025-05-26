@@ -19,9 +19,6 @@ public class DiggableObjects : MonoBehaviour
     private float bobbingAmount = 0.1f;
     private Coroutine bobbingCoroutine;
 
-    [Header("Tutorial Popup")]
-    public TutorialPopup tutorialPopup;
-
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -53,10 +50,6 @@ public class DiggableObjects : MonoBehaviour
         hasBeenDug = true; 
         interactionPrompt.SetActive(false);
 
-        if (tutorialPopup != null)
-        {
-            tutorialPopup.ShowTutorialStep(4); 
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
