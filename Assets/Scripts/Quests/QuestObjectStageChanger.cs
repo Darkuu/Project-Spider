@@ -1,4 +1,5 @@
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class QuestObjectStageChanger : MonoBehaviour
 {
@@ -25,27 +26,57 @@ public class QuestObjectStageChanger : MonoBehaviour
 
         lastStage = currentStage;
 
+        // Find the matching stage entry
+        StageEntry currentEntry = null;
         foreach (var entry in stages)
         {
-            bool isCurrent = entry.stage == currentStage;
+            if (entry.stage == currentStage)
+            {
+                currentEntry = entry;
+                break;
+            }
+        }
 
+        // Deactivate all previously active objects
+        foreach (var entry in stages)
+        {
             if (entry.activate != null)
             {
                 foreach (GameObject obj in entry.activate)
-                {
-                    if (obj != null)
-                        obj.SetActive(isCurrent);
-                }
-            }
-
-            if (entry.deactivate != null && isCurrent)
-            {
-                foreach (GameObject obj in entry.deactivate)
                 {
                     if (obj != null)
                         obj.SetActive(false);
                 }
             }
         }
+
+        // Activate relevant objects for the current stage
+        if (currentEntry != null)
+        {
+            if (currentEntry.activate != null)
+            {
+                foreach (GameObject obj in currentEntry.activate)
+                {
+                    if (obj != null)
+                        obj.SetActive(true);
+                }
+            }
+
+            if (currentEntry.deactivate != null)
+            {
+                foreach (GameObject obj in currentEntry.deactivate)
+                {
+                    if (obj != null && obj != this.gameObject) 
+                        StartCoroutine(DeferredDeactivate(obj));
+                }
+            }
+        }
+    }
+
+    private IEnumerator DeferredDeactivate(GameObject obj)
+    {
+        yield return new WaitForEndOfFrame();
+        if (obj != null)
+            obj.SetActive(false);
     }
 }
