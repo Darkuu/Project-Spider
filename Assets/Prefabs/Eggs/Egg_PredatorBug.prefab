@@ -176,9 +176,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba48d26dda35b54cb7a46387bb58364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eggItem: {fileID: 11400000, guid: 60bdc427e8f7674499c6b956707f8cc7, type: 2}
-  eggType: EggIceBug
-  bugPrefab: {fileID: 5392620315565645491, guid: f8492baee3dcd6d479fe2c7148364816, type: 3}
+  eggItem: {fileID: 11400000, guid: 6db65f0e73709bb4d846985dd2b633f6, type: 2}
+  eggType: EggPredatorBug
+  bugPrefab: {fileID: 3718428952743051271, guid: 042d7676f98123f499a4570b0bbc9888, type: 3}
 --- !u!114 &4733972004157165189
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,4 +191,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 642ee0ae190c1bc40a4c8a86e4e472d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyTime: 30
+  destroyTime: 120
