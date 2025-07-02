@@ -14,7 +14,7 @@ Banished from your home, you venture into the unknown—meeting strange spiders,
 
 ##  Play It Now
 
-Play on Itch.io](https://daarku.itch.io/spider-meadow)
+[Play on Itch.io](https://daarku.itch.io/spider-meadow)
 
 ---
 
