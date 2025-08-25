@@ -18,7 +18,7 @@ Banished from your home, you venture into the unknown—meeting strange spiders,
 
 ---
 
-## 🧭 How to Install
+##  How to Install
 
 1. **Download the ZIP File**
    - Visit the game’s [Itch.io page](https://daarku.itch.io/spider-meadow).
